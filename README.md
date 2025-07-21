@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="image/power-bi-banner.jpg" alt="Dataviz powerbi" width="50%">
+  <img src="image/power-bi-banner.jpg" alt="Dataviz powerbi" width="35%">
 </p>
 
 # 📊 Projet Power BI — Analyse des ventes 
@@ -16,7 +16,6 @@ Créer un tableau de bord interactif et visuellement clair permettant :
 - D'identifier les groupes de clients et produits à cibler pour des actions marketing
 - De fournir une **aide à la décision stratégique** orientée client
 
-
 ## 🧠 Technologies utilisées
 
 - Power BI Desktop (format PBIP)
@@ -27,9 +26,18 @@ Créer un tableau de bord interactif et visuellement clair permettant :
 
 ## 🖼️ Aperçu
 
-![Page générale](./assets/Dashboard/Page_générale.png)
-![Page Produits](./assets/Dashboard/Page_Produits.png)
-![Page Client-Segment](./assets/Dashboard/Page_Client.png)
+##### **Modèle de données en étoile**
+<img src="./Assets/Dashboard/Modèle de données.png" alt="Page Client-Segment" width="400"/>
+
+##### *Page générale*: Vue globale sur les ventes
+<img src="./Assets/Dashboard/Page_générale.png" alt="Page générale" width="400"/>
+
+##### *Page Produits*: Performances produits
+<img src="./Assets/Dashboard/Page_Produits.png" alt="Page Produits" width="400"/>
+
+
+##### *Page Clients*: Performances Segments
+<img src="./Assets/Dashboard/Page_Client.png" alt="Page Client-Segment" width="400"/>
 
 ## 📌 Données utilisées
 
