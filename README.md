@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="image/power-bi-banner.jpgCover.png" alt="Dataviz powerbi" width="50%">
+  <img src="image/power-bi-banner.jpg" alt="Dataviz powerbi" width="50%">
 </p>
 
 # 📊 Projet Power BI — Analyse des ventes 
