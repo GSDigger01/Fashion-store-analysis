@@ -1,0 +1,35 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
+  "name": "cb3801323c3c3930558c",
+  "position": {
+    "x": 1.6666666666666667,
+    "y": 1.6666666666666667,
+    "z": 2500,
+    "height": 36.666666666666671,
+    "width": 30,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "image",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "imageUrl": {
+              "expr": {
+                "ResourcePackageItem": {
+                  "PackageName": "RegisteredResources",
+                  "PackageType": 1,
+                  "ItemName": "entonnoir6965417408367641.png"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "parentGroupName": "6b9f2fbe0990553e8233",
+  "howCreated": "InsertVisualButton"
+}

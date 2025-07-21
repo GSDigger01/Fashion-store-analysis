@@ -1,0 +1,16 @@
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+# Power BI
+*.pbix~
+*.tmp
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+
+# Mac
+._*
+
+# VSCode
+.vscode/

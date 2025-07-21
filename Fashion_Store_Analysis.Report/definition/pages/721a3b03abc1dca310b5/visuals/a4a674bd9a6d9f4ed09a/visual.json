@@ -1,0 +1,35 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
+  "name": "a4a674bd9a6d9f4ed09a",
+  "position": {
+    "x": 0,
+    "y": 0,
+    "z": 2000,
+    "height": 35.783974585245325,
+    "width": 47.169784680550656,
+    "tabOrder": 14002
+  },
+  "visual": {
+    "visualType": "image",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "imageUrl": {
+              "expr": {
+                "ResourcePackageItem": {
+                  "PackageName": "RegisteredResources",
+                  "PackageType": 1,
+                  "ItemName": "rafraichir6887528960286101.png"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "parentGroupName": "8debd6fbbee00a47026a",
+  "howCreated": "InsertVisualButton"
+}

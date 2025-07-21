@@ -1,0 +1,177 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
+  "name": "749b506f8d0308374725",
+  "position": {
+    "x": 994,
+    "y": 52,
+    "z": 2000,
+    "height": 156,
+    "width": 270,
+    "tabOrder": 4000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "La catégorie ",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Light",
+                      "fontSize": "9pt",
+                      "color": "#ff99ee"
+                    }
+                  },
+                  {
+                    "value": "féminine",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Light",
+                      "fontStyle": "italic",
+                      "fontSize": "9pt",
+                      "color": "#ff99ee"
+                    }
+                  },
+                  {
+                    "value": " représente environ ",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Light",
+                      "fontSize": "9pt",
+                      "color": "#ff99ee"
+                    }
+                  },
+                  {
+                    "value": "50%",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontFamily": "Segoe UI Light",
+                      "fontSize": "9pt",
+                      "color": "#ff99ee"
+                    }
+                  },
+                  {
+                    "value": " de nos ventes en terme de quantité et de rentabilité.",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Light",
+                      "fontSize": "9pt",
+                      "color": "#ff99ee"
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "center",
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Les sous-catégories de produit les plus rentables sont les \"",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Light",
+                      "fontSize": "9pt",
+                      "color": "#ff99ee"
+                    }
+                  },
+                  {
+                    "value": "Pants and Jeans",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Light",
+                      "fontStyle": "italic",
+                      "fontSize": "9pt",
+                      "color": "#ff99ee"
+                    }
+                  },
+                  {
+                    "value": "\" et les \"",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Light",
+                      "fontSize": "9pt",
+                      "color": "#ff99ee"
+                    }
+                  },
+                  {
+                    "value": "Coats and Blazers",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Light",
+                      "fontStyle": "italic",
+                      "fontSize": "9pt",
+                      "color": "#ff99ee"
+                    }
+                  },
+                  {
+                    "value": "\" .",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Light",
+                      "fontSize": "9pt",
+                      "color": "#ff99ee"
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "center",
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "45%",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontFamily": "Segoe UI Light",
+                      "fontSize": "9pt",
+                      "color": "#ff99ee"
+                    }
+                  },
+                  {
+                    "value": " de nos ventes sont enregistrées le weekend ",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Light",
+                      "fontSize": "9pt",
+                      "color": "#ff99ee"
+                    }
+                  },
+                  {
+                    "value": "(samedi et dimanche",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Light",
+                      "fontStyle": "italic",
+                      "fontSize": "9pt",
+                      "color": "#ff99ee"
+                    }
+                  },
+                  {
+                    "value": ") .",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Light",
+                      "fontSize": "9pt",
+                      "color": "#ff99ee"
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "center",
+                "listType": "bullet"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,213 @@
+table clients
+	lineageTag: a814ff3e-70d9-4ce4-a019-ae3f9b6dc216
+
+	column 'Customer ID'
+		dataType: int64
+		formatString: 0
+		lineageTag: 794e8903-1220-4a92-95c0-fdb3c748a92f
+		summarizeBy: none
+		sourceColumn: Customer ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Name
+		dataType: string
+		lineageTag: 22e7b181-7642-4fd0-abe1-8d52070ec6eb
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Email
+		dataType: string
+		lineageTag: d36819c0-9e7e-4522-b40f-be31bc8946a3
+		summarizeBy: none
+		sourceColumn: Email
+
+		annotation SummarizationSetBy = Automatic
+
+	column City
+		dataType: string
+		lineageTag: 65319010-69c3-4264-bc48-4006f5dde038
+		summarizeBy: none
+		sourceColumn: City
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: 5465f567-3fd7-4d74-993a-71369dce1b5f
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date Of Birth'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 63b7b385-0143-4a0f-bdec-7b0a909bd360
+		summarizeBy: none
+		sourceColumn: Date Of Birth
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Job Title'
+		dataType: string
+		lineageTag: 463d475b-bca4-41bc-9d15-a66bcdd91846
+		summarizeBy: none
+		sourceColumn: Job Title
+
+		annotation SummarizationSetBy = Automatic
+
+	column Age
+		dataType: int64
+		formatString: 0
+		lineageTag: 0bfdfb73-e969-4015-997f-57485bb8a04d
+		summarizeBy: none
+		sourceColumn: Age
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Classe Age'
+		dataType: string
+		lineageTag: cf6ff490-b355-40b2-9e30-f940c610bf7d
+		summarizeBy: none
+		sourceColumn: Classe Age
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order Age'
+		dataType: string
+		lineageTag: 52ae1e40-8dcf-4647-86f1-4b8fec6b53a1
+		summarizeBy: none
+		sourceColumn: Order Age
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sexe
+		dataType: string
+		lineageTag: aa668de8-f5b2-4c72-9804-5194508b7cb5
+		summarizeBy: none
+		sourceColumn: Sexe
+
+		annotation SummarizationSetBy = Automatic
+
+	column Recency
+		dataType: int64
+		formatString: 0
+		lineageTag: adabc77c-3a74-4c5a-ac2a-0f82bb4e9c10
+		summarizeBy: none
+		sourceColumn: Recency
+
+		annotation SummarizationSetBy = Automatic
+
+	column Frequency
+		dataType: int64
+		formatString: 0
+		lineageTag: 3e12d51f-af3c-41d3-8fa1-58400587cadd
+		summarizeBy: none
+		sourceColumn: Frequency
+
+		annotation SummarizationSetBy = Automatic
+
+	column Monetary
+		dataType: double
+		lineageTag: 04844c15-42b3-40ae-ba62-d14dd986a11e
+		summarizeBy: none
+		sourceColumn: Monetary
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column segment
+		dataType: string
+		lineageTag: 0701ff14-30e5-4130-a1f7-36f9f8cfa828
+		summarizeBy: none
+		sourceColumn: segment
+		sortByColumn: 'Order segment'
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order segment'
+		dataType: string
+		lineageTag: 7a53c3e5-7f5e-4399-8340-7317da65ebd7
+		summarizeBy: none
+		sourceColumn: Order segment
+
+		annotation SummarizationSetBy = Automatic
+
+	partition clients = m
+		mode: import
+		source = ```
+				let
+				    // === Source Clients ===
+				    SourceClients = Fn_Import("clients.csv"),
+				    ClientsSansTelephone = Table.RemoveColumns(SourceClients,{"Telephone"}),
+				    ClientsTypesCorriges = Table.TransformColumnTypes(ClientsSansTelephone,{{"Date Of Birth", type date}}),
+				    ClientsAvecAge = Table.AddColumn(ClientsTypesCorriges, "Age", each Number.RoundDown(Duration.TotalDays(Date.From(DateTime.LocalNow()) - [Date Of Birth]) / 365.25)),
+				    ClientsTypesCorriges2 = Table.TransformColumnTypes(ClientsAvecAge,{{"Age", Int64.Type}, {"Customer ID", Int64.Type}}),
+				    PaysTraduit1 = Table.ReplaceValue(ClientsTypesCorriges2,"España","Espagne",Replacer.ReplaceText,{"Country"}),
+				    PaysTraduit2 = Table.ReplaceValue(PaysTraduit1,"United Kingdom","Royaume Uni",Replacer.ReplaceText,{"Country"}),
+				    PaysTraduit3 = Table.ReplaceValue(PaysTraduit2, "Germany", "Allemagne", Replacer.ReplaceText, {"Country"}),
+				    PaysTraduit4 = Table.ReplaceValue(PaysTraduit3, "Netherlands", "Pays-Bas", Replacer.ReplaceText, {"Country"}),
+				    PaysTraduit5 = Table.ReplaceValue(PaysTraduit4, "United States", "USA", Replacer.ReplaceText, {"Country"}),
+				    PaysTraduit6 = Table.ReplaceValue(PaysTraduit5,"中国","Chine",Replacer.ReplaceText,{"Country"}),
+				    PaysTraduit7 = Table.ReplaceValue(PaysTraduit6,"Deutschland","Allemagne",Replacer.ReplaceText,{"Country"}),
+				    SexeRemplace1 = Table.ReplaceValue(PaysTraduit7,"F","Femme",Replacer.ReplaceText,{"Gender"}),
+				    SexeRemplace2 = Table.ReplaceValue(SexeRemplace1,"M","Homme",Replacer.ReplaceText,{"Gender"}),
+				    SexeRemplace3 = Table.ReplaceValue(SexeRemplace2,"D","Autres",Replacer.ReplaceText,{"Gender"}),
+				    
+				    ClientsClasseAge = Table.AddColumn(SexeRemplace3, "Classe Age", each 
+				        if [Age] >= 18 and [Age]<= 24  then "18-24 ans"
+				        else if [Age] >= 25 and [Age] <= 34 then "25-34 ans"
+				        else if [Age] >= 35 and [Age] <= 44 then "35-44 ans"
+				        else if [Age] >=45 and [Age] <= 59 then "45-59 ans"
+				        else if [Age] >= 60 then "60 ans et plus"
+				        else null),
+				
+				    ClientsClasseOrder = Table.AddColumn(ClientsClasseAge, "Order Age", each 
+				        if [Age] >= 18 and [Age] <= 24 then 1
+				        else if [Age] >= 25 and [Age] <= 34 then 2
+				        else if [Age] >= 35 and [Age] <= 44 then 3
+				        else if [Age] >= 45 and [Age] <= 59 then 4
+				        else if [Age] >= 60 then 5
+				        else null),
+				
+				    ClientsFiltrés = Table.SelectRows(ClientsClasseOrder, each ([Country] <> "Chine")),
+				    ClientsFinal = Table.RenameColumns(ClientsFiltrés,{{"Gender", "Sexe"}}),
+				
+				    // === Source RFM ===
+				    SourceRFM = Fn_Import("rfm_final_export.csv"),
+				    RFMType1 = Table.TransformColumnTypes(SourceRFM,{{"customer_id", Int64.Type}, {"Recency", Int64.Type}, {"Frequency", Int64.Type}}),
+				    RFMMontantTexte = Table.ReplaceValue(RFMType1,".",",",Replacer.ReplaceText,{"Monetary"}),
+				    RFMType2 = Table.TransformColumnTypes(RFMMontantTexte,{{"Monetary", type number}}),
+				    RFMNettoye = Table.RemoveColumns(RFMType2,{"R", "F", "M", "RFM_Score"}),
+				    RFM_final = Table.AddColumn(RFMNettoye, "Order segment", each 
+				        if [segment] = "Premium"  then 1
+				        else if [segment] = "Fidèles"  then 2
+				        else if [segment] = "Nouveaux" then 3
+				        else if [segment] = "À Réactiver"then 4
+				        else if [segment] ="Inactifs" then 5
+				        else null),
+				
+				    // === Fusion des deux ===
+				    Fusion = Table.NestedJoin(
+				        ClientsFinal, {"Customer ID"},
+				        RFM_final, {"customer_id"},
+				        "RFM", JoinKind.Inner
+				    ),
+				    Clients = Table.ExpandTableColumn(Fusion, "RFM", {"Recency", "Frequency", "Monetary","segment","Order segment"})
+				
+				in
+				    Clients
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,56 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
+  "name": "5366838c07e33ab4de44",
+  "position": {
+    "x": 260,
+    "y": 436.66666666666663,
+    "z": 7000,
+    "height": 41.111111111111107,
+    "width": 467.77777777777777,
+    "tabOrder": 12000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Le mois de décembre est le plus performant avec environ 20% des ventes totales. ",
+                    "textStyle": {
+                      "color": "#ff99ee"
+                    }
+                  },
+                  {
+                    "value": " "
+                  }
+                ],
+                "horizontalTextAlignment": "center",
+                "listType": "bullet"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

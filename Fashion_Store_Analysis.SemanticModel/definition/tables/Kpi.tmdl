@@ -1,0 +1,59 @@
+table Kpi
+	lineageTag: 4d6d3b6b-5789-4a60-a9fa-4ab797aa00d1
+
+	column Kpi
+		lineageTag: 7abce970-4789-4630-a92b-c7b3f9bb94bd
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Kpi Commande'
+
+		relatedColumnDetails
+			groupByColumn: 'Kpi Champs'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Kpi Champs'
+		isHidden
+		lineageTag: a5eeddb5-50b8-49a0-b23a-aa8f6fd378a7
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Kpi Commande'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Kpi Commande'
+		isHidden
+		formatString: 0
+		lineageTag: dbd8a1a9-70a1-49c8-9ef8-b3d5407ab9c4
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Kpi = calculated
+		mode: import
+		source = ```
+				{
+				    
+				    ("CA", NAMEOF('mesures'[CA]), 0),
+				    ("Panier Moy.", NAMEOF(mesures[Panier Moy.]),2),
+				    ("Qté retour", NAMEOF('mesures'[Qté retour]), 4),
+				    ("CA retour", NAMEOF('mesures'[CA retour]), 5),
+				    ("Marge", NAMEOF('mesures'[Marge brut]), 1),
+				    ("Commandes",NAMEOF('mesures'[Nbre Commande]), 3),
+				    ("Coût prod",NAMEOF('mesures'[Cout Prod]), 7),
+				    ("Quantité", NAMEOF('mesures'[Qté vendu]), 6),
+				    ("Nbre client", NAMEOF('mesures'[Nbre clients]), 7)
+				
+				    
+				}
+				```
+
+	annotation PBI_Id = b6be51f2b6274378868ba141d27f5796
+

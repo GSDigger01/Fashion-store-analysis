@@ -1,0 +1,34 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
+  "name": "2cef2c5cac20b31a0778",
+  "position": {
+    "x": 56.392735349110573,
+    "y": 0,
+    "z": 4000,
+    "height": 75,
+    "width": 88.333333333333343
+  },
+  "visual": {
+    "visualType": "image",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "imageUrl": {
+              "expr": {
+                "ResourcePackageItem": {
+                  "PackageName": "RegisteredResources",
+                  "PackageType": 1,
+                  "ItemName": "Face_Card20848021590754418.png"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "parentGroupName": "3668aeffdd0c3ac96e31",
+  "howCreated": "InsertVisualButton"
+}

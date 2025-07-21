@@ -1,0 +1,70 @@
+expression Fn_Import =
+		(NomFichier as text) as table =>
+		let
+		    CheminDossier = "C:\Users\NOGO G$\Desktop\ISJ\ISJ_perso\Projet\Global_fashion_Analysis\Fashion_data\",
+		    CheminComplet = CheminDossier & NomFichier,
+		    Source = Csv.Document(File.Contents(CheminComplet), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.None]),
+		    EntetesPromus = Table.PromoteHeaders(Source, [PromoteAllScalars=true])
+		in
+		    EntetesPromus
+	lineageTag: 63627300-91c9-4f36-9360-d54ab2ac8d49
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Function
+
+expression clients-old =
+		let
+		    Source = Fn_Import("clients.csv"),
+		    #"Colonnes supprimées" = Table.RemoveColumns(Source,{"Telephone"}),
+		    #"Type modifié" = Table.TransformColumnTypes(#"Colonnes supprimées",{{"Date Of Birth", type date}}),
+		    #"Personnalisée ajoutée" = Table.AddColumn(#"Type modifié", "Age", each Number.RoundDown(Duration.TotalDays(Date.From(DateTime.LocalNow()) - [Date Of Birth]) / 365.25)),
+		    #"Type modifié1" = Table.TransformColumnTypes(#"Personnalisée ajoutée",{{"Age", Int64.Type}, {"Customer ID", Int64.Type}}),
+		    #"Valeur remplacée" = Table.ReplaceValue(#"Type modifié1","España","Espagne",Replacer.ReplaceText,{"Country"}),
+		    #"Valeur remplacée1" = Table.ReplaceValue(#"Valeur remplacée","United Kingdom","Royaume Uni",Replacer.ReplaceText,{"Country"}),
+		
+		    #"RemplacePays2" = Table.ReplaceValue(#"Valeur remplacée1", "Germany", "Allemagne", Replacer.ReplaceText, {"Country"}),
+		    #"RemplacePays3" = Table.ReplaceValue(#"RemplacePays2", "Netherlands", "Pays-Bas", Replacer.ReplaceText, {"Country"}),
+		    #"RemplacePays4" = Table.ReplaceValue(#"RemplacePays3", "United States", "USA", Replacer.ReplaceText, {"Country"}),
+		    #"Valeur remplacée2" = Table.ReplaceValue(RemplacePays4,"中国","Chine",Replacer.ReplaceText,{"Country"}),
+		    #"Valeur remplacée3" = Table.ReplaceValue(#"Valeur remplacée2","Deutschland","Allemagne",Replacer.ReplaceText,{"Country"}),
+		    #"Valeur remplacée4" = Table.ReplaceValue(#"Valeur remplacée3","F","Femme",Replacer.ReplaceText,{"Gender"}),
+		    #"Valeur remplacée5" = Table.ReplaceValue(#"Valeur remplacée4","M","Homme",Replacer.ReplaceText,{"Gender"}),
+		    #"Valeur remplacée6" = Table.ReplaceValue(#"Valeur remplacée5","D","Autres",Replacer.ReplaceText,{"Gender"}),
+		    #"Personnalisée ajoutée1" = Table.AddColumn(#"Valeur remplacée6", "Classe Age", each if [Age] >= 18 and [Age]<= 24  then "18-24 ans"
+		else if [Age] >= 25 and [Age] <= 34 then "25-34 ans"
+		else if [Age] >= 35 and [Age] <= 44 then "35-44 ans"
+		else if [Age] >=45 and [Age] <= 59 then "45-59 ans"
+		else if [Age] >= 60 then "60 ans et plus"
+		else null),
+		    #"Personnalisée ajoutée2" = Table.AddColumn(#"Personnalisée ajoutée1", "Order Age", each if [Age] >= 18 and [Age] <= 24 then 1
+		  else if [Age] >= 25 and [Age] <= 34 then 2
+		  else if [Age] >= 35 and [Age] <= 44 then 3
+		  else if [Age] >= 45 and [Age] <= 59 then 4
+		  else if [Age] >= 60 then 5
+		  else null),
+		    #"Lignes filtrées" = Table.SelectRows(#"Personnalisée ajoutée2", each ([Country] <> "Chine")),
+		    #"Colonnes renommées" = Table.RenameColumns(#"Lignes filtrées",{{"Gender", "Sexe"}})
+		in
+		    #"Colonnes renommées"
+	lineageTag: a99d9ca9-11df-4b1f-b7cb-16a44993df37
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression RFM-Client =
+		let
+		    Source = Fn_Import("rfm_final_export.csv"),
+		    #"Type modifié" = Table.TransformColumnTypes(Source,{{"customer_id", Int64.Type}, {"Recency", Int64.Type}, {"Frequency", Int64.Type}}),
+		    #"Valeur remplacée" = Table.ReplaceValue(#"Type modifié",".",",",Replacer.ReplaceText,{"Monetary"}),
+		    #"Type modifié1" = Table.TransformColumnTypes(#"Valeur remplacée",{{"Monetary", type number}}),
+		    #"Colonnes supprimées" = Table.RemoveColumns(#"Type modifié1",{"R", "F", "M", "RFM_Score"})
+		in
+		    #"Colonnes supprimées"
+	lineageTag: e747fc18-1352-4240-9ee3-315bb18241ac
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

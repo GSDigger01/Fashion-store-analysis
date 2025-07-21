@@ -1,0 +1,62 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
+  "name": "c3966dd9be9cecbf2776",
+  "position": {
+    "x": 0,
+    "y": 0,
+    "z": 17000,
+    "height": 37.777777777777779,
+    "width": 292.22222222222223,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "50%",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "color": "#ff99ee"
+                    }
+                  },
+                  {
+                    "value": " des clients nous génèrent une marge  d'au moins ",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Light",
+                      "fontSize": "9pt",
+                      "color": "#ff99ee"
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "center"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "parentGroupName": "f91631247decda3000a5"
+}

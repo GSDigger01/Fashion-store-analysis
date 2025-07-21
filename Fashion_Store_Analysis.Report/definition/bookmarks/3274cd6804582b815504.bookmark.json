@@ -1,0 +1,2057 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/1.4.0/schema.json",
+  "displayName": "filtre ON _Client",
+  "name": "3274cd6804582b815504",
+  "options": {
+    "targetVisualNames": [],
+    "suppressData": true
+  },
+  "explorationState": {
+    "version": "1.11",
+    "activeSection": "721a3b03abc1dca310b5",
+    "filters": {
+      "byExpr": [
+        {
+          "name": "5dddc968029bc2eab3d7",
+          "type": "Categorical",
+          "filter": {
+            "Version": 2,
+            "From": [
+              {
+                "Name": "c",
+                "Entity": "clients",
+                "Type": 0
+              }
+            ],
+            "Where": [
+              {
+                "Condition": {
+                  "Not": {
+                    "Expression": {
+                      "In": {
+                        "Expressions": [
+                          {
+                            "Column": {
+                              "Expression": {
+                                "SourceRef": {
+                                  "Source": "c"
+                                }
+                              },
+                              "Property": "Country"
+                            }
+                          }
+                        ],
+                        "Values": [
+                          [
+                            {
+                              "Literal": {
+                                "Value": "null"
+                              }
+                            }
+                          ]
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          "expression": {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Entity": "clients"
+                }
+              },
+              "Property": "Country"
+            }
+          },
+          "howCreated": 1
+        },
+        {
+          "name": "d9146a43d81a27551d03",
+          "type": "Categorical",
+          "filter": {
+            "Version": 2,
+            "From": [
+              {
+                "Name": "m",
+                "Entity": "magasins",
+                "Type": 0
+              }
+            ],
+            "Where": [
+              {
+                "Condition": {
+                  "Not": {
+                    "Expression": {
+                      "In": {
+                        "Expressions": [
+                          {
+                            "Column": {
+                              "Expression": {
+                                "SourceRef": {
+                                  "Source": "m"
+                                }
+                              },
+                              "Property": "Country"
+                            }
+                          }
+                        ],
+                        "Values": [
+                          [
+                            {
+                              "Literal": {
+                                "Value": "null"
+                              }
+                            }
+                          ]
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          "expression": {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Entity": "magasins"
+                }
+              },
+              "Property": "Country"
+            }
+          },
+          "howCreated": 1
+        }
+      ]
+    },
+    "sections": {
+      "721a3b03abc1dca310b5": {
+        "visualContainers": {
+          "986179c4969ec2656893": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "340a28131a31131244b3",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "mesures"
+                        }
+                      },
+                      "Property": "Actualisation"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "card",
+              "objects": {}
+            }
+          },
+          "1688d2f0c550a2759b77": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "aa60bea360d1e577682a": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "0d9a8ac7c56e9b920590": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "2de8e2ba30c70d7d45c0",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "clients"
+                        }
+                      },
+                      "Property": "Classe Age"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "5a4e32f9216df3d470ff",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "clients"
+                        }
+                      },
+                      "Property": "segment"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "9160f9ade9fb66b8c3b9",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "mesures"
+                        }
+                      },
+                      "Property": "Marge médian/client"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "96ddc791ae544099efb4",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "mesures"
+                        }
+                      },
+                      "Property": "Marge brut"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "lineClusteredColumnComboChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "mesures"
+                        }
+                      },
+                      "Property": "Marge brut"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "clients"
+                        }
+                      },
+                      "Property": "segment"
+                    }
+                  }
+                ]
+              },
+              "projections": {
+                "Y": [
+                  {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "mesures"
+                        }
+                      },
+                      "Property": "Marge brut"
+                    }
+                  }
+                ],
+                "Series": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "clients"
+                        }
+                      },
+                      "Property": "Classe Age"
+                    }
+                  }
+                ],
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "clients"
+                        }
+                      },
+                      "Property": "segment"
+                    }
+                  }
+                ],
+                "Y2": [
+                  {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "mesures"
+                        }
+                      },
+                      "Property": "Marge médian/client"
+                    }
+                  }
+                ]
+              },
+              "parameters": {
+                "Y": [
+                  {
+                    "expr": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Kpi"
+                          }
+                        },
+                        "Property": "Kpi"
+                      }
+                    },
+                    "index": 0,
+                    "length": 1
+                  }
+                ]
+              }
+            }
+          },
+          "069b6fc5880680d23b2c": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "6221a22e93ff7c44202e",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "clients"
+                        }
+                      },
+                      "Property": "Sexe"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "6562e56a4675849497de",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "mesures"
+                        }
+                      },
+                      "Property": "Marge brut"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "donutChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "mesures"
+                        }
+                      },
+                      "Property": "Marge brut"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "clients"
+                        }
+                      },
+                      "Property": "Sexe"
+                    }
+                  }
+                ]
+              },
+              "projections": {
+                "Y": [
+                  {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "mesures"
+                        }
+                      },
+                      "Property": "Marge brut"
+                    }
+                  }
+                ],
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "clients"
+                        }
+                      },
+                      "Property": "Sexe"
+                    }
+                  }
+                ]
+              },
+              "parameters": {
+                "Y": [
+                  {
+                    "expr": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Kpi"
+                          }
+                        },
+                        "Property": "Kpi"
+                      }
+                    },
+                    "index": 0,
+                    "length": 1
+                  }
+                ]
+              }
+            }
+          },
+          "b49bdfc392c0ab255a36": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "7d47fec323d303d61059",
+                  "type": "Categorical",
+                  "filter": {
+                    "Version": 2,
+                    "From": [
+                      {
+                        "Name": "k",
+                        "Entity": "Kpi",
+                        "Type": 0
+                      }
+                    ],
+                    "Where": [
+                      {
+                        "Condition": {
+                          "In": {
+                            "Expressions": [
+                              {
+                                "Column": {
+                                  "Expression": {
+                                    "SourceRef": {
+                                      "Source": "k"
+                                    }
+                                  },
+                                  "Property": "Kpi Champs"
+                                }
+                              }
+                            ],
+                            "Values": [
+                              [
+                                {
+                                  "Literal": {
+                                    "Value": "'''mesures''[Marge brut]'"
+                                  }
+                                }
+                              ],
+                              [
+                                {
+                                  "Literal": {
+                                    "Value": "'''mesures''[Nbre Commande]'"
+                                  }
+                                }
+                              ],
+                              [
+                                {
+                                  "Literal": {
+                                    "Value": "'''mesures''[Nbre clients]'"
+                                  }
+                                }
+                              ]
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Kpi"
+                        }
+                      },
+                      "Property": "Kpi"
+                    }
+                  },
+                  "howCreated": 0,
+                  "cachedDisplayNames": [
+                    {
+                      "id": {
+                        "scopeId": {
+                          "Comparison": {
+                            "ComparisonKind": 0,
+                            "Left": {
+                              "Column": {
+                                "Expression": {
+                                  "SourceRef": {
+                                    "Entity": "Kpi"
+                                  }
+                                },
+                                "Property": "Kpi Champs"
+                              }
+                            },
+                            "Right": {
+                              "Literal": {
+                                "Value": "'''mesures''[Marge brut]'"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "displayName": "Marge"
+                    },
+                    {
+                      "id": {
+                        "scopeId": {
+                          "Comparison": {
+                            "ComparisonKind": 0,
+                            "Left": {
+                              "Column": {
+                                "Expression": {
+                                  "SourceRef": {
+                                    "Entity": "Kpi"
+                                  }
+                                },
+                                "Property": "Kpi Champs"
+                              }
+                            },
+                            "Right": {
+                              "Literal": {
+                                "Value": "'''mesures''[Nbre Commande]'"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "displayName": "Commandes"
+                    },
+                    {
+                      "id": {
+                        "scopeId": {
+                          "Comparison": {
+                            "ComparisonKind": 0,
+                            "Left": {
+                              "Column": {
+                                "Expression": {
+                                  "SourceRef": {
+                                    "Entity": "Kpi"
+                                  }
+                                },
+                                "Property": "Kpi Champs"
+                              }
+                            },
+                            "Right": {
+                              "Literal": {
+                                "Value": "'''mesures''[Nbre clients]'"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "displayName": "Nbre client"
+                    }
+                  ]
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "advancedSlicerVisual",
+              "objects": {
+                "merge": {
+                  "general": [
+                    {
+                      "properties": {
+                        "filter": {
+                          "filter": {
+                            "Version": 2,
+                            "From": [
+                              {
+                                "Name": "k",
+                                "Entity": "Kpi",
+                                "Type": 0
+                              }
+                            ],
+                            "Where": [
+                              {
+                                "Condition": {
+                                  "In": {
+                                    "Expressions": [
+                                      {
+                                        "Column": {
+                                          "Expression": {
+                                            "SourceRef": {
+                                              "Source": "k"
+                                            }
+                                          },
+                                          "Property": "Kpi Champs"
+                                        }
+                                      }
+                                    ],
+                                    "Values": [
+                                      [
+                                        {
+                                          "Literal": {
+                                            "Value": "'''mesures''[Marge brut]'"
+                                          }
+                                        }
+                                      ]
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "selection": [
+                    {
+                      "properties": {
+                        "strictSingleSelect": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "true"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "cachedFilterDisplayItems": [
+                {
+                  "id": {
+                    "scopeId": {
+                      "Comparison": {
+                        "ComparisonKind": 0,
+                        "Left": {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Entity": "Kpi"
+                              }
+                            },
+                            "Property": "Kpi Champs"
+                          }
+                        },
+                        "Right": {
+                          "Literal": {
+                            "Value": "'''mesures''[Marge brut]'"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "displayName": "Marge"
+                }
+              ]
+            }
+          },
+          "dd5c050fb271c8473243": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "7d47fec323d303d61059",
+                  "type": "Categorical",
+                  "filter": {
+                    "Version": 2,
+                    "From": [
+                      {
+                        "Name": "k",
+                        "Entity": "Kpi",
+                        "Type": 0
+                      }
+                    ],
+                    "Where": [
+                      {
+                        "Condition": {
+                          "In": {
+                            "Expressions": [
+                              {
+                                "Column": {
+                                  "Expression": {
+                                    "SourceRef": {
+                                      "Source": "k"
+                                    }
+                                  },
+                                  "Property": "Kpi Champs"
+                                }
+                              }
+                            ],
+                            "Values": [
+                              [
+                                {
+                                  "Literal": {
+                                    "Value": "'''mesures''[Qté vendu]'"
+                                  }
+                                }
+                              ],
+                              [
+                                {
+                                  "Literal": {
+                                    "Value": "'''mesures''[Cout Prod]'"
+                                  }
+                                }
+                              ],
+                              [
+                                {
+                                  "Literal": {
+                                    "Value": "'''mesures''[Marge brut]'"
+                                  }
+                                }
+                              ]
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Kpi"
+                        }
+                      },
+                      "Property": "Kpi"
+                    }
+                  },
+                  "howCreated": 1,
+                  "cachedDisplayNames": [
+                    {
+                      "id": {
+                        "scopeId": {
+                          "Comparison": {
+                            "ComparisonKind": 0,
+                            "Left": {
+                              "Column": {
+                                "Expression": {
+                                  "SourceRef": {
+                                    "Entity": "Kpi"
+                                  }
+                                },
+                                "Property": "Kpi Champs"
+                              }
+                            },
+                            "Right": {
+                              "Literal": {
+                                "Value": "'''mesures''[Qté vendu]'"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "displayName": "Quantité"
+                    },
+                    {
+                      "id": {
+                        "scopeId": {
+                          "Comparison": {
+                            "ComparisonKind": 0,
+                            "Left": {
+                              "Column": {
+                                "Expression": {
+                                  "SourceRef": {
+                                    "Entity": "Kpi"
+                                  }
+                                },
+                                "Property": "Kpi Champs"
+                              }
+                            },
+                            "Right": {
+                              "Literal": {
+                                "Value": "'''mesures''[Cout Prod]'"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "displayName": "Coût prod"
+                    },
+                    {
+                      "id": {
+                        "scopeId": {
+                          "Comparison": {
+                            "ComparisonKind": 0,
+                            "Left": {
+                              "Column": {
+                                "Expression": {
+                                  "SourceRef": {
+                                    "Entity": "Kpi"
+                                  }
+                                },
+                                "Property": "Kpi Champs"
+                              }
+                            },
+                            "Right": {
+                              "Literal": {
+                                "Value": "'''mesures''[Marge brut]'"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "displayName": "Marge"
+                    }
+                  ]
+                },
+                {
+                  "name": "366f9587e0571d32820d",
+                  "type": "Categorical",
+                  "filter": {
+                    "Version": 2,
+                    "From": [
+                      {
+                        "Name": "d",
+                        "Entity": "Dimension",
+                        "Type": 0
+                      }
+                    ],
+                    "Where": [
+                      {
+                        "Condition": {
+                          "In": {
+                            "Expressions": [
+                              {
+                                "Column": {
+                                  "Expression": {
+                                    "SourceRef": {
+                                      "Source": "d"
+                                    }
+                                  },
+                                  "Property": "Dimension Champs"
+                                }
+                              }
+                            ],
+                            "Values": [
+                              [
+                                {
+                                  "Literal": {
+                                    "Value": "'''clients''[segment]'"
+                                  }
+                                }
+                              ],
+                              [
+                                {
+                                  "Literal": {
+                                    "Value": "'''clients''[Classe Age]'"
+                                  }
+                                }
+                              ]
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Dimension"
+                        }
+                      },
+                      "Property": "Dimension"
+                    }
+                  },
+                  "howCreated": 0,
+                  "cachedDisplayNames": [
+                    {
+                      "id": {
+                        "scopeId": {
+                          "Comparison": {
+                            "ComparisonKind": 0,
+                            "Left": {
+                              "Column": {
+                                "Expression": {
+                                  "SourceRef": {
+                                    "Entity": "Dimension"
+                                  }
+                                },
+                                "Property": "Dimension Champs"
+                              }
+                            },
+                            "Right": {
+                              "Literal": {
+                                "Value": "'''clients''[segment]'"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "displayName": "segment"
+                    },
+                    {
+                      "id": {
+                        "scopeId": {
+                          "Comparison": {
+                            "ComparisonKind": 0,
+                            "Left": {
+                              "Column": {
+                                "Expression": {
+                                  "SourceRef": {
+                                    "Entity": "Dimension"
+                                  }
+                                },
+                                "Property": "Dimension Champs"
+                              }
+                            },
+                            "Right": {
+                              "Literal": {
+                                "Value": "'''clients''[Classe Age]'"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "displayName": "Classe Age"
+                    }
+                  ]
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "advancedSlicerVisual",
+              "objects": {
+                "merge": {
+                  "general": [
+                    {
+                      "properties": {
+                        "filter": {
+                          "filter": {
+                            "Version": 2,
+                            "From": [
+                              {
+                                "Name": "d",
+                                "Entity": "Dimension",
+                                "Type": 0
+                              }
+                            ],
+                            "Where": [
+                              {
+                                "Condition": {
+                                  "In": {
+                                    "Expressions": [
+                                      {
+                                        "Column": {
+                                          "Expression": {
+                                            "SourceRef": {
+                                              "Source": "d"
+                                            }
+                                          },
+                                          "Property": "Dimension Champs"
+                                        }
+                                      }
+                                    ],
+                                    "Values": [
+                                      [
+                                        {
+                                          "Literal": {
+                                            "Value": "'''clients''[Classe Age]'"
+                                          }
+                                        }
+                                      ]
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "selection": [
+                    {
+                      "properties": {
+                        "strictSingleSelect": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "true"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "cachedFilterDisplayItems": [
+                {
+                  "id": {
+                    "scopeId": {
+                      "Comparison": {
+                        "ComparisonKind": 0,
+                        "Left": {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Entity": "Dimension"
+                              }
+                            },
+                            "Property": "Dimension Champs"
+                          }
+                        },
+                        "Right": {
+                          "Literal": {
+                            "Value": "'''clients''[Classe Age]'"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "displayName": "Classe Age"
+                }
+              ]
+            }
+          },
+          "425f018901013830059e": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "b135f80f3a6993e30f43",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "mesures"
+                        }
+                      },
+                      "Property": "Marge brut"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "d5a52ffe794645967032",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "mesures"
+                        }
+                      },
+                      "Property": "%YoY Marge"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "00d0ad2617eb449ef6ef",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "clients"
+                        }
+                      },
+                      "Property": "Classe Age"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "pivotTable",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "mesures"
+                        }
+                      },
+                      "Property": "Marge brut"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Rows": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "clients"
+                        }
+                      },
+                      "Property": "Classe Age"
+                    }
+                  }
+                ]
+              },
+              "projections": {
+                "Rows": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "clients"
+                        }
+                      },
+                      "Property": "Classe Age"
+                    }
+                  }
+                ],
+                "Values": [
+                  {
+                    "NativeVisualCalculation": {
+                      "Language": "dax",
+                      "Expression": "\r\nRANK(\r\n    DENSE,\r\n    ROWS,\r\n    ORDERBY([Marge ],DESC)\r\n)",
+                      "Name": "Rang"
+                    }
+                  },
+                  {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "mesures"
+                        }
+                      },
+                      "Property": "Marge brut"
+                    }
+                  },
+                  {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "mesures"
+                        }
+                      },
+                      "Property": "%YoY Marge"
+                    }
+                  },
+                  {
+                    "NativeVisualCalculation": {
+                      "Language": "dax",
+                      "Expression": "[Marge ]",
+                      "Name": "bar"
+                    }
+                  },
+                  {
+                    "NativeVisualCalculation": {
+                      "Language": "dax",
+                      "Expression": "FORMAT(DIVIDE([Marge ],COLLAPSEALL([Marge ],ROWS)),\"percent\",\"FR-fr\")",
+                      "Name": "%Marge T."
+                    }
+                  },
+                  {
+                    "NativeVisualCalculation": {
+                      "Language": "dax",
+                      "Expression": "\r\n    SUMX(\r\n        WINDOW(\r\n            0,ABS, 0,REL, ROWS,ORDERBY([Marge ],DESC)),[Marge ])",
+                      "Name": "Cumul val"
+                    }
+                  },
+                  {
+                    "NativeVisualCalculation": {
+                      "Language": "dax",
+                      "Expression": "FORMAT(DIVIDE([Cumul val],COLLAPSEALL([Marge ],ROWS)),\"percent\")",
+                      "Name": "Cumul %"
+                    }
+                  },
+                  {
+                    "NativeVisualCalculation": {
+                      "Language": "dax",
+                      "Expression": "DIVIDE([Cumul val],COLLAPSEALL([Marge ],ROWS))",
+                      "Name": "rank Cumul %"
+                    }
+                  }
+                ]
+              },
+              "parameters": {
+                "Rows": [
+                  {
+                    "expr": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "Dimension"
+                          }
+                        },
+                        "Property": "Dimension"
+                      }
+                    },
+                    "index": 0,
+                    "length": 1
+                  }
+                ]
+              }
+            }
+          },
+          "720956b3503aa408a653": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "e3658640c753ff3f97fe",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "clients"
+                        }
+                      },
+                      "Property": "segment"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "189679566a89a3409e60",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "clients"
+                        }
+                      },
+                      "Property": "Classe Age"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "e0a48151d628a223e6fd",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "mesures"
+                        }
+                      },
+                      "Property": "Nbre clients"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "pivotTable",
+              "objects": {},
+              "activeProjections": {
+                "Columns": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "clients"
+                        }
+                      },
+                      "Property": "segment"
+                    }
+                  }
+                ],
+                "Rows": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "clients"
+                        }
+                      },
+                      "Property": "Classe Age"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "6fc31b98b7bd154b5807": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "8c386cb0ec65034dc991": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "a3a14f60694b9921d5da",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "mesures"
+                        }
+                      },
+                      "Property": "%engagés"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "mesures"
+                        }
+                      },
+                      "Property": "%engagés"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "7d124000064608000638": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "8248e4a18b1531fee7ca",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "mesures"
+                        }
+                      },
+                      "Property": "Pie_client"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "d23ef854f79894caad57",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "mesures"
+                        }
+                      },
+                      "Property": "%engagés"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "donutChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "mesures"
+                        }
+                      },
+                      "Property": "Pie_client"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "26c0316a2e7e0b7eaa1c": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "5439849403e6055d2ac7": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "94404043cb655d01576b",
+                  "type": "Advanced",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Calendrier_auto"
+                        }
+                      },
+                      "Property": "Mois"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "8b453be6f4612608a41b",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "mesures"
+                        }
+                      },
+                      "Property": "Nbre clients"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "areaChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "mesures"
+                        }
+                      },
+                      "Property": "Nbre clients"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Calendrier_auto"
+                        }
+                      },
+                      "Property": "Mois"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "d3254493bd8ddd158076": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "40ba5e03327b09706349",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "mesures"
+                        }
+                      },
+                      "Property": "Nbre clients"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "69246dd51644e1b9823f",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "mesures"
+                        }
+                      },
+                      "Property": "Marge médian/client"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "cardVisual",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "mesures"
+                        }
+                      },
+                      "Property": "Nbre clients"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "a58acfeaa3c129743054": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "6cb532a76181845e7eb2",
+                  "type": "Advanced",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Calendrier_auto"
+                        }
+                      },
+                      "Property": "Mois"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "6f228f7477385cc900b6",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "mesures"
+                        }
+                      },
+                      "Property": "Marge médian/client"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "areaChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "mesures"
+                        }
+                      },
+                      "Property": "Marge médian/client"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Calendrier_auto"
+                        }
+                      },
+                      "Property": "Mois"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "0466c50029660c1db8bc": {
+            "singleVisual": {
+              "visualType": "image",
+              "objects": {}
+            }
+          },
+          "746c51a7cd0d3d7f0faf": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "8abee26566eaee994ade": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "3ca0c716c359aa7dc9a1": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "ef6d9f437949e1795438",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "produits"
+                        }
+                      },
+                      "Property": "catégorie"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "produits"
+                        }
+                      },
+                      "Property": "catégorie"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "ec6d01f1a98b11f15055": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "2c0e3510c05af7ec3161",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "clients"
+                        }
+                      },
+                      "Property": "segment"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "clients"
+                        }
+                      },
+                      "Property": "segment"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "6bab9dfc332ff886e9ac": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "bd4dec51fbfffc939530",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Calendrier_auto"
+                        }
+                      },
+                      "Property": "NomMois"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "selection": [
+                    {
+                      "properties": {
+                        "strictSingleSelect": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "false"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Calendrier_auto"
+                        }
+                      },
+                      "Property": "NomMois"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "1d2d5c05d7d79a764cbc": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "9cd0d826a2d5b11b0619",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "magasins"
+                        }
+                      },
+                      "Property": "Country"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "magasins"
+                        }
+                      },
+                      "Property": "Country"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "1f9e7fdb9d20397224e7": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "d4237311376d129cf2ca": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "8224691d059af341ccb2": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "b26f19ec054c652e05ae",
+                  "type": "Advanced",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Calendrier_auto"
+                        }
+                      },
+                      "Property": "Année"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "general": [
+                    {
+                      "properties": {
+                        "filter": {
+                          "filter": {
+                            "Version": 2,
+                            "From": [
+                              {
+                                "Name": "c",
+                                "Entity": "Calendrier_auto",
+                                "Type": 0
+                              }
+                            ],
+                            "Where": [
+                              {
+                                "Condition": {
+                                  "In": {
+                                    "Expressions": [
+                                      {
+                                        "Column": {
+                                          "Expression": {
+                                            "SourceRef": {
+                                              "Source": "c"
+                                            }
+                                          },
+                                          "Property": "Année"
+                                        }
+                                      }
+                                    ],
+                                    "Values": [
+                                      [
+                                        {
+                                          "Literal": {
+                                            "Value": "2025L"
+                                          }
+                                        }
+                                      ]
+                                    ]
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "selection": [
+                    {
+                      "properties": {
+                        "strictSingleSelect": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "true"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Calendrier_auto"
+                        }
+                      },
+                      "Property": "Année"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "852e2cfa9f984b40532f": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "0e01feb640f4ef1655b2",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "mesures"
+                        }
+                      },
+                      "Property": "Active filter"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "card",
+              "objects": {}
+            }
+          },
+          "db0de96a9517dba604f1": {
+            "singleVisual": {
+              "visualType": "image",
+              "objects": {}
+            }
+          },
+          "0c18892f0a0f660558aa": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          }
+        },
+        "visualContainerGroups": {
+          "ff4545d8a6ee94503126": {
+            "isHidden": false
+          }
+        }
+      }
+    },
+    "objects": {
+      "merge": {
+        "outspacePane": [
+          {
+            "properties": {
+              "expanded": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

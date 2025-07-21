@@ -1,0 +1,53 @@
+table employees
+	lineageTag: ff6f8af3-512c-49bb-86a8-44aa79db0655
+
+	column 'Employee ID'
+		dataType: int64
+		formatString: 0
+		lineageTag: ba0ea22e-2a52-4ec5-a904-e1e04d62eade
+		summarizeBy: none
+		sourceColumn: Employee ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Store ID'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a13b4cdc-7e5f-4cb3-962a-6ee8ce9bb35f
+		summarizeBy: none
+		sourceColumn: Store ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Name
+		dataType: string
+		lineageTag: 8012e1df-b9fa-40d5-b8ee-d9674bc56ebc
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Position
+		dataType: string
+		lineageTag: 93d5e08b-dc77-47c1-b69d-731edda36965
+		summarizeBy: none
+		sourceColumn: Position
+
+		annotation SummarizationSetBy = Automatic
+
+	partition employees = m
+		mode: import
+		source =
+				let
+				    Source = Fn_Import("employees.csv"),
+				    #"Type modifié" = Table.TransformColumnTypes(Source,{{"Employee ID", Int64.Type}, {"Store ID", Int64.Type}})
+				in
+				    #"Type modifié"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

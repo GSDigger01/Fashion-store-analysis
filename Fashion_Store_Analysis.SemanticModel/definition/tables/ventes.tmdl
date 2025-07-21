@@ -1,0 +1,186 @@
+table ventes
+	lineageTag: 5a984eb1-eb7d-46e5-ac5b-bddb9126c09b
+
+	column 'Invoice ID'
+		dataType: string
+		lineageTag: 959b27b7-42ba-472e-b970-eb6bac6db804
+		summarizeBy: none
+		sourceColumn: Invoice ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Line
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: fb59982d-0404-48dc-a79d-463a9dba3acf
+		summarizeBy: sum
+		sourceColumn: Line
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer ID'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: feedaa23-40b8-49d8-90d6-6aadb4a4bb48
+		summarizeBy: none
+		sourceColumn: Customer ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product ID'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 2fb767b8-0f32-4f59-bc84-6b12accab8f1
+		summarizeBy: none
+		sourceColumn: Product ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Size
+		dataType: string
+		lineageTag: e55d4a64-5554-41a8-8ecc-9c67f81c8d0f
+		summarizeBy: none
+		sourceColumn: Size
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Unit Price'
+		dataType: decimal
+		isHidden
+		formatString: #,0\ "€";-#,0\ "€";#,0\ "€"
+		lineageTag: a8764210-7ed0-412b-97ab-fd88d2d6963b
+		summarizeBy: sum
+		sourceColumn: Unit Price
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quantity
+		dataType: int64
+		formatString: 0
+		lineageTag: 01dd4194-e9a6-429e-872a-058703562d2f
+		summarizeBy: sum
+		sourceColumn: Quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		lineageTag: 78ced636-8953-4096-8de6-0e0b94c0355e
+		summarizeBy: none
+		sourceColumn: Date
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Discount
+		dataType: double
+		isHidden
+		lineageTag: 4f77eb0a-84f0-4506-adf2-b79ea6ea11f1
+		summarizeBy: sum
+		sourceColumn: Discount
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Line Total'
+		dataType: decimal
+		isHidden
+		formatString: #,0\ "€";-#,0\ "€";#,0\ "€"
+		lineageTag: 1bffce93-c734-4c1b-a1fb-63372b758f52
+		summarizeBy: sum
+		sourceColumn: Line Total
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Store ID'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 22c9b366-633c-4947-b04b-412a38f49bff
+		summarizeBy: none
+		sourceColumn: Store ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Employee ID'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 9f632452-2d59-4af2-98b7-0de198012a7a
+		summarizeBy: none
+		sourceColumn: Employee ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Transaction Type'
+		dataType: string
+		lineageTag: d5b8c724-5888-4881-bade-7b438a750ca5
+		summarizeBy: none
+		sourceColumn: Transaction Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Payment Method'
+		dataType: string
+		lineageTag: 611c2f60-d1f3-4c63-8ebd-b9af91563c7c
+		summarizeBy: none
+		sourceColumn: Payment Method
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Invoice Total'
+		dataType: decimal
+		formatString: #,0\ "€";-#,0\ "€";#,0\ "€"
+		lineageTag: 2e84839d-b8ed-40b6-8d05-8ed1c0291575
+		summarizeBy: sum
+		sourceColumn: Invoice Total
+
+		annotation SummarizationSetBy = Automatic
+
+	partition ventes = m
+		mode: import
+		source =
+				let
+				    Source = Fn_Import("ventes.csv"),
+				    #"Colonnes supprimées" = Table.RemoveColumns(Source,{"Color", "Currency", "Currency Symbol", "SKU"}),
+				    #"Type modifié" = Table.TransformColumnTypes(#"Colonnes supprimées",{{"Date", type datetime}, {"Line", Int64.Type}, {"Customer ID", Int64.Type}, {"Product ID", Int64.Type}}),
+				    #"Valeur remplacée" = Table.ReplaceValue(#"Type modifié",".",",",Replacer.ReplaceText,{"Unit Price"}),
+				    #"Type modifié1" = Table.TransformColumnTypes(#"Valeur remplacée",{{"Unit Price", Currency.Type}, {"Quantity", Int64.Type}}),
+				    #"Valeur remplacée1" = Table.ReplaceValue(#"Type modifié1",".",",",Replacer.ReplaceText,{"Discount"}),
+				    #"Type modifié2" = Table.TransformColumnTypes(#"Valeur remplacée1",{{"Discount", type number}}),
+				    #"Valeur remplacée2" = Table.ReplaceValue(#"Type modifié2",".",",",Replacer.ReplaceText,{"Line Total"}),
+				    #"Type modifié3" = Table.TransformColumnTypes(#"Valeur remplacée2",{{"Line Total", Currency.Type}, {"Store ID", Int64.Type}, {"Employee ID", Int64.Type}}),
+				    #"Valeur remplacée3" = Table.ReplaceValue(#"Type modifié3",".",",",Replacer.ReplaceText,{"Invoice Total"}),
+				    #"Type modifié4" = Table.TransformColumnTypes(#"Valeur remplacée3",{{"Invoice Total", Currency.Type}, {"Date", type date}})
+				in
+				    #"Type modifié4"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

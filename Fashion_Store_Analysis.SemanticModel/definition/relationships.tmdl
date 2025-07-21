@@ -1,0 +1,25 @@
+relationship AutoDetected_f7ebabff-de50-44d4-9bdf-00871b9f5040
+	fromColumn: ventes.'Employee ID'
+	toColumn: employees.'Employee ID'
+
+relationship AutoDetected_27710d43-5be6-4df6-b709-f2d211c5fdbb
+	isActive: false
+	fromColumn: employees.'Store ID'
+	toColumn: magasins.'Store ID'
+
+relationship AutoDetected_569f8dab-d247-484e-9614-34615ef40da7
+	fromColumn: ventes.'Store ID'
+	toColumn: magasins.'Store ID'
+
+relationship AutoDetected_6cbb949c-f9fc-477d-b9de-850ffef190db
+	fromColumn: ventes.'Product ID'
+	toColumn: produits.'Product ID'
+
+relationship 05312d4f-7933-d5a8-f4d0-040f5bb3d5bd
+	fromColumn: ventes.Date
+	toColumn: Calendrier_auto.Date
+
+relationship AutoDetected_5285c878-ca2d-49ee-b155-18b18efe6aa2
+	fromColumn: ventes.'Customer ID'
+	toColumn: clients.'Customer ID'
+

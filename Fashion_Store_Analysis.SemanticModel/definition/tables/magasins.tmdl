@@ -1,0 +1,89 @@
+table magasins
+	lineageTag: 61aff063-26d3-488c-a823-88ec986c6173
+
+	column 'Store ID'
+		dataType: int64
+		formatString: 0
+		lineageTag: c20d1a79-e74c-4e04-a3ea-4f77885d888d
+		summarizeBy: none
+		sourceColumn: Store ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: 4acd0e2f-2d47-4ed8-b6cb-cb4f074f6ffa
+		dataCategory: Country
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column City
+		dataType: string
+		lineageTag: a880252d-ff4b-4a1b-bbbd-98f6fac36626
+		dataCategory: Country
+		summarizeBy: none
+		sourceColumn: City
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Store Name'
+		dataType: string
+		lineageTag: 3e8e2ad1-cca6-44de-8395-ed1630d8c37a
+		isDefaultLabel
+		summarizeBy: none
+		sourceColumn: Store Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Number of Employees'
+		dataType: int64
+		formatString: 0
+		lineageTag: 013b9ad8-2703-4e90-bb5d-bb040181c97c
+		summarizeBy: none
+		sourceColumn: Number of Employees
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ville
+		dataType: string
+		lineageTag: 73fdf9c5-5d34-4f9d-9adf-6ca61ad25393
+		dataCategory: County
+		summarizeBy: none
+		sourceColumn: Ville
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'Country Hiérarchie'
+		lineageTag: d85eeed0-eb85-4425-853d-a519c6864b49
+
+		level Country
+			lineageTag: 02329f80-9b5f-429d-95c9-d75a357cc452
+			column: Country
+
+		level City
+			lineageTag: 2d3fee43-0015-4a47-93cd-88a29b19d9f8
+			column: City
+
+	partition magasins = m
+		mode: import
+		source =
+				let
+				    Source = Fn_Import("magasins-ville.csv"),
+				    #"Colonnes supprimées" = Table.RemoveColumns(Source,{"ZIP Code", "Latitude", "Longitude"}),
+				    #"Type modifié" = Table.TransformColumnTypes(#"Colonnes supprimées",{{"Store ID", Int64.Type}, {"Number of Employees", Int64.Type}}),
+				    #"Valeur remplacée" = Table.ReplaceValue(#"Type modifié","中国","Chine",Replacer.ReplaceText,{"Country"}),
+				    #"Valeur remplacée1" = Table.ReplaceValue(#"Valeur remplacée","United States","USA",Replacer.ReplaceText,{"Country"}),
+				    #"Valeur remplacée2" = Table.ReplaceValue(#"Valeur remplacée1","Deutschland","Allemagne",Replacer.ReplaceText,{"Country"}),
+				    #"Valeur remplacée3" = Table.ReplaceValue(#"Valeur remplacée2","United Kingdom","Royaume Uni",Replacer.ReplaceText,{"Country"}),
+				    #"Valeur remplacée4" = Table.ReplaceValue(#"Valeur remplacée3","España","Espagne",Replacer.ReplaceText,{"Country"}),
+				    #"Lignes filtrées" = Table.SelectRows(#"Valeur remplacée4", each ([Country] <> "Chine")),
+				    #"Colonnes supprimées1" = Table.RemoveColumns(#"Lignes filtrées",{"City_Clean"})
+				in
+				    #"Colonnes supprimées1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

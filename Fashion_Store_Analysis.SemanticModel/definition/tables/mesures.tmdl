@@ -1,0 +1,1212 @@
+table mesures
+	lineageTag: f5a45cc8-0703-4e85-b472-79da550f982e
+
+	measure CA =
+			
+			CALCULATE(
+			    SUM(ventes[Invoice Total]),
+			    RELATEDTABLE(ventes)
+			)
+		formatString: #,0.0\ "€";-#,0.0\ "€";#,0.0\ "€"
+		displayFolder: Ventes
+		lineageTag: c1dab092-b7d1-45f0-b462-4abde59d3d36
+
+	measure 'Nbre employee' = CALCULATE(COUNTROWS(employees), USERELATIONSHIP(employees[Store ID],magasins[Store ID]))
+		formatString: 0
+		displayFolder: Dimensions\produit
+		lineageTag: 0c2afd24-a8a3-4def-86cc-bf4dd3be1f6d
+
+	measure 'Nbre Commande' = CALCULATE( DISTINCTCOUNT(ventes[Invoice ID]))
+		formatString: #,0
+		displayFolder: Ventes\Card commande
+		lineageTag: 48b086ff-b820-4ea7-90da-a7774c90ab7f
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Qté vendu' =
+			
+			CALCULATE(
+			    SUM(ventes[Quantity]),
+			    RELATEDTABLE(ventes)
+			)
+		formatString: 0
+		displayFolder: Ventes\Qté
+		lineageTag: b08d15db-ebdf-44f3-996a-706ad550f5b9
+
+	measure 'Nbre magasin' = CALCULATE(COUNTROWS(magasins))
+		formatString: 0
+		displayFolder: Dimensions\produit
+		lineageTag: 50bb1f73-d57f-4f0e-94bd-a4aea2afdd7a
+
+	measure 'Nbre clients' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(ventes[Customer ID]),
+			    RELATEDTABLE(ventes)
+			)
+		formatString: #,0
+		displayFolder: Dimensions\Client
+		lineageTag: 00449bf6-9ffd-458b-8bba-73f680ce5841
+
+	measure 'Nbre Ref' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(ventes[Product ID]),
+			    RELATEDTABLE(ventes)
+			)
+		formatString: 0
+		displayFolder: Dimensions\produit
+		lineageTag: 4e38bcb0-03f0-4cd7-9f6c-313509678b9e
+
+	measure 'Nbre retour' = ```
+			
+			CALCULATE(
+			    DISTINCTCOUNT(ventes[Invoice ID]),
+			    RELATEDTABLE(ventes),
+			    'ventes'[Invoice Total] < 0
+			    
+			)
+			```
+		displayFolder: Retour
+		lineageTag: d17bc222-0a59-4e50-841d-1970935ca57f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'CA retour' = ```
+			
+			CALCULATE(
+			    ABS(SUM(ventes[Invoice Total])),
+			    RELATEDTABLE(ventes),
+			    'ventes'[Invoice Total] < 0
+			    
+			)
+			```
+		formatString: #,0.00\ "€";-#,0.00\ "€";#,0.00\ "€"
+		displayFolder: Retour
+		lineageTag: d80fa5de-dd92-4452-a877-f37fd371d52b
+
+	measure 'Qté retour' = ```
+			
+			CALCULATE(
+			    SUM(ventes[Quantity]),
+			    RELATEDTABLE(ventes),
+			    'ventes'[Invoice Total] < 0
+			    
+			)
+			```
+		displayFolder: Retour
+		lineageTag: 40b4298e-f720-4e60-9d39-c8b62bd05ae0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure %Retour = ```
+			
+			DIVIDE(
+			    CALCULATE(ABS(SUM('ventes'[invoice total])), 'ventes'[invoice total] < 0),
+			    CALCULATE(SUM('ventes'[invoice total]), 'ventes'[invoice total] > 0)
+			)
+			
+			```
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		displayFolder: Retour
+		lineageTag: b88df93c-0336-40c5-b85d-47b43a6c132e
+
+	measure 'Cout Prod' =
+			
+			SUMX(
+			    'ventes',
+			    RELATED('produits'[Production Cost]) * 'ventes'[Quantity])
+		formatString: #,0.0\ "€";-#,0.0\ "€";#,0.0\ "€"
+		displayFolder: Marge
+		lineageTag: 70dd34c6-d5a3-465e-9d0f-e002c0a73c24
+
+	measure 'Marge brut' = [CA]- [Cout Prod]
+		formatString: #,0.0\ "€";-#,0.0\ "€";#,0.0\ "€"
+		displayFolder: Marge
+		lineageTag: 43ec87df-0520-4988-ab15-c1d5e22ce2ad
+
+	measure '%Marge brut' =
+			
+			DIVIDE([Marge brut], [CA])
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Marge
+		lineageTag: e39eb448-aac1-46a7-82a8-8dec1e684929
+
+	measure 'Classe Marge' = ```
+			
+			SWITCH(TRUE(),
+			    [%Marge brut] < 0.1, "Très faible",
+			    [%Marge brut] < 0.2, "Faible",
+			    [%Marge brut] < 0.4, "Moyenne",
+			    [%Marge brut] < 0.6, "Bonne",
+			    "Très bonne"
+			)
+			
+			```
+		displayFolder: Marge
+		lineageTag: 7744a6a6-365d-4384-87c5-70d2e9b0d916
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure CultureTest = FORMAT(1234.56, "#,0.0")
+		formatString: 0.00
+		lineageTag: f3e6e817-67c4-48b4-9621-6542c4970ac5
+
+	measure 'CA PY' = ```
+			
+			    CALCULATE([CA YTD],DATESYTD(SAMEPERIODLASTYEAR(Calendrier_auto[Date])))
+			```
+		displayFolder: Ventes\Card CA
+		lineageTag: ed5750ce-7d38-4256-a4db-d68e9328a161
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'delta CA' = [CA YTD] - [CA PY]
+		displayFolder: Ventes\Card CA
+		lineageTag: c8439d60-df7b-4820-aab1-96d8bc441b8d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '%delta  CA' =
+			
+			DIVIDE([delta CA],[CA PY])
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Ventes\Card CA
+		lineageTag: 018ce299-68ff-436a-a9d0-59618b74a863
+
+	measure 'CA YTD' =
+			
+			CALCULATE(
+			    SUM(ventes[Invoice Total]),
+			    DATESYTD('Calendrier_auto'[Date])
+			)
+		displayFolder: Ventes\Card CA
+		lineageTag: 722db3ea-6f92-4af2-a113-f0ce0180eed2
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Date max' = MAX('Calendrier_auto'[Date])
+		displayFolder: Ventes
+		lineageTag: db68c6d9-90b0-45ba-8f65-9133d9d85fe9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Label CA' = ```
+			
+			VAR montant = [delta CA]
+			VAR Pourcentage = [%delta  CA]
+			VAR CA_PY = [CA PY]
+			
+			
+			VAR montantFormat =
+			    SWITCH(
+			        TRUE(),
+			        ISBLANK(CA_PY) || CA_PY = 0, "0 €",
+			        ABS(montant) >= 1000000,
+			            FORMAT(montant / 1000000, "+#,0.0\ M€;-#,0.0\ M€;0 €","fr-FR"),
+			        FORMAT(montant / 1000, "+#,0.0\ K€;-#,0.0\ K€;0 €","fr-FR")
+			    )
+			
+			
+			-- Pourcentage avec + ou - ou 0
+			VAR PourcentageFormat =
+			    IF(
+			        ISBLANK(CA_PY) || CA_PY = 0,
+			        "0%",
+			        FORMAT(Pourcentage, "+0.00%;-0.00%;0.00%","fr-FR")
+			    )
+			
+			-- Flèche directionnelle
+			VAR Fleche =
+			    SWITCH(
+			        TRUE(),
+			        ISBLANK(CA_PY) || CA_PY = 0, "→",
+			        Pourcentage < 0, "▼",
+			        Pourcentage > 0, "▲",
+			        "→"  -- cas par défaut si Pourcentage = 0
+			    )
+			
+			
+			RETURN
+			montantFormat & " | " & PourcentageFormat & " " & Fleche
+			
+			```
+		displayFolder: Ventes\Card CA
+		lineageTag: 693f631c-3d14-4827-9dc0-0d2b822db701
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'CA color' = ```
+			
+			SWITCH(
+			    TRUE(),
+			    [%delta  CA] > 0, "#009300",
+			    [%delta  CA] < 0, "#A60000",
+			    "Gray"
+			
+			)
+			
+			```
+		displayFolder: Ventes\Card CA
+		lineageTag: dbc1e15b-04ed-4ecf-8ba2-2fa87f28168a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Commande PY' = ```
+			
+			    CALCULATE([Nbre Commande],DATESYTD(SAMEPERIODLASTYEAR(Calendrier_auto[Date])))
+			```
+		displayFolder: Ventes\Card commande
+		lineageTag: 40c66db7-6f69-4b20-ba17-228ec41b3815
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'delta Com' = ```
+			[Nbre Commande] -[Commande PY] 
+			```
+		displayFolder: Ventes\Card commande
+		lineageTag: 765cae62-e6f4-4dbe-abbd-d4c6dc8ee297
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '%delta Com' = DIVIDE([delta Com],[Commande PY])
+		displayFolder: Ventes\Card commande
+		lineageTag: 4505548f-02c0-4da2-a70f-8196cdb8d3e3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Label Com' = ```
+			
+			VAR commande = [delta Com]
+			VAR Pourcentage = [%delta Com]
+			VAR CA_PY = [Commande PY]
+			
+			
+			VAR commandeFormat =
+			    SWITCH(
+			        TRUE(),
+			        ISBLANK(CA_PY) || CA_PY = 0, "0 €",
+			        ABS(commande) >= 1000000,
+			            FORMAT(commande / 1000000, "+#,0.0\ M;-#,0.0\ M;0 €","fr-FR"),
+			        FORMAT(commande / 1000, "+#,0.0\ K;-#,0.0\ K;0 ","fr-FR")
+			    )
+			
+			
+			-- Pourcentage avec + ou - ou 0
+			VAR PourcentageFormat =
+			    IF(
+			        ISBLANK(CA_PY) || CA_PY = 0,
+			        "0%",
+			        FORMAT(Pourcentage, "+0.00%;-0.00%;0.00%","fr-FR")
+			    )
+			
+			-- Flèche directionnelle
+			VAR Fleche =
+			    SWITCH(
+			        TRUE(),
+			        ISBLANK(CA_PY) || CA_PY = 0, "→",
+			        Pourcentage < 0, "▼",
+			        Pourcentage > 0, "▲",
+			        "→"  -- cas par défaut si Pourcentage = 0
+			    )
+			
+			
+			RETURN
+			commandeFormat & " | " & PourcentageFormat & " " & Fleche
+			
+			```
+		displayFolder: Ventes\Card commande
+		lineageTag: 9f674a74-cf52-4a82-bb10-ff42f94ac5ac
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Com color' = ```
+			
+			SWITCH(
+			    TRUE(),
+			    [%delta Com] > 0, "#009300",
+			    [%delta Com] < 0, "#A60000",
+			    "Gray"
+			
+			)
+			
+			```
+		displayFolder: Ventes\Card commande
+		lineageTag: ca9ca4dd-caf3-49c9-8f30-67d01fa92c44
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Label-2 CA' = ```
+			
+			
+			VAR Pourcentage = [%delta  CA]
+			VAR CA_PY = [CA PY]
+			
+			
+			
+			-- Pourcentage avec + ou - ou 0
+			VAR PourcentageFormat =
+			    IF(
+			        ISBLANK(CA_PY) || CA_PY = 0,
+			        "0,0%",
+			        FORMAT(Pourcentage, "+0.0%;-0.0%;0.0%","fr-FR")
+			    )
+			
+			-- Flèche directionnelle
+			VAR Fleche =
+			    SWITCH(
+			        TRUE(),
+			        ISBLANK(CA_PY) || CA_PY = 0, "→",
+			        Pourcentage < 0, "▼",
+			        Pourcentage > 0, "▲",
+			        "→"  -- cas par défaut si Pourcentage = 0
+			    )
+			
+			
+			RETURN
+			 "  " & PourcentageFormat & " " & Fleche
+			 
+			```
+		displayFolder: Ventes\Card CA
+		lineageTag: 918ed3b7-9a90-4816-83a3-cf45f23b670c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Pie_retour = 1-[%Retour]
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Retour
+		lineageTag: df034a64-77f5-4133-828a-68eda8c5d6ad
+
+	measure Pie_marge = 1 - [%Marge brut]
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Marge\Card
+		lineageTag: a011b91d-060a-4818-83d0-739db203807b
+
+	measure '%marge LY' = CALCULATE([%Marge brut],SAMEPERIODLASTYEAR(Calendrier_auto[Date]))
+		displayFolder: Marge
+		lineageTag: 5e851c30-7c40-4c46-9550-0409b6116790
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'delta Marge Pts' = ```
+			
+			VAR Marge_CY = [%Marge brut] 
+			VAR Marge_PY = [%marge LY] 
+			RETURN
+			IF(
+			    ISBLANK(Marge_PY),
+			    BLANK(),
+			    Marge_CY - Marge_PY
+			)
+			
+			```
+		displayFolder: Marge
+		lineageTag: 16182c17-df8b-4c98-be2c-b2f237f83e44
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Label delta Marge' = ```
+			
+			VAR Marge_CY = [%Marge brut]
+			VAR Marge_PY = [%marge LY]
+			VAR Delta = Marge_CY - Marge_PY
+			
+			RETURN
+			SWITCH(
+			    TRUE(),
+			    ISBLANK(Marge_CY) || ISBLANK(Marge_PY), "→ 0 pt",
+			    Delta > 0, "+" & FORMAT(Delta * 100, "0.00","fr-FR") & " pts" & "▲",
+			    Delta < 0,  "-" & FORMAT(ABS(Delta * 100), "0.00","fr-FR") & " pts" & "▼",
+			    "→ 0.00 pt"
+			)
+			
+			```
+		displayFolder: Marge\Card
+		lineageTag: 7e9e5dc6-3791-47d0-b965-5a2e739903a1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'marge color' =
+			SWITCH(
+			    TRUE(),
+			    [delta Marge Pts] > 0, "#009300",
+			    [delta Marge Pts] < 0, "#A60000",
+			    "Gray"
+			
+			)
+		displayFolder: Marge\Card
+		lineageTag: 46c9623b-257e-4e99-bfad-cfaf10698672
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '%Retour PY' = CALCULATE([%Retour], SAMEPERIODLASTYEAR(Calendrier_auto[Date]))
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Retour
+		lineageTag: 111c0a49-b034-4822-bf12-5847d3eac86a
+
+	measure 'delta retour pts' = ```
+			
+			
+			VAR Marge_CY = [%Retour]
+			VAR Marge_PY = [%Retour PY] 
+			RETURN
+			IF(
+			    ISBLANK(Marge_PY),
+			    BLANK(),
+			    Marge_CY - Marge_PY
+			)
+			
+			```
+		displayFolder: Retour
+		lineageTag: bd2fc461-e5c9-43e4-824a-deb42a355d75
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'retour color' =
+			SWITCH(
+			    TRUE(),
+			    [delta retour pts] > 0, "#A60000",
+			    [delta retour pts] < 0, "#009300",
+			    "Gray"
+			
+			)
+		displayFolder: Retour
+		lineageTag: 17f32037-833e-45a6-8f19-0444fada19f6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Titre KPI Dynamique' = ```
+			
+			SWITCH(
+			    SELECTEDVALUE('Kpi'[Kpi Commande]),
+			    0, "Chiffre d'Affaires mensuel vs PY",
+			    3, "Commandes mensuelles vs PY",
+			    6, "Quantités mensuelles vs PY",
+			    "KPI"
+			)
+			
+			```
+		displayFolder: Titre dynamique
+		lineageTag: a0ae37ad-037c-4997-b49d-2428dc6cc448
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Actualisation = ```
+			
+			VAR DateMaj = MAX('Last_Maj'[Date])
+			RETURN
+			" | " & 
+			FORMAT(DateMaj, "[$-fr-FR]d mmmm yyyy","fr-FR")
+			
+			```
+		lineageTag: 272d2cbc-f8e5-4c55-8f46-c7bc240ca582
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Panier Moy.' = ```
+			
+			    VAR vente = [CA]
+			    VAR com = [Nbre Commande]
+			    RETURN 
+			        DIVIDE(vente, com) 
+			```
+		formatString: #,0.0\ "€";-#,0.0\ "€";#,0.0\ "€"
+		displayFolder: Ventes
+		lineageTag: a9dd46b4-43f2-450a-861f-07e1af8aee60
+
+	measure KPI_select = SELECTEDMEASURE()
+		displayFolder: Ventes
+		lineageTag: 5852b649-70e3-4c8c-91c1-5888a8b5871d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Top5_Flag = ```
+			
+			VAR _KPI = [KPI_select]
+			RETURN
+			    IF(
+			        RANKX(
+			            ALLSELECTED(Produits[Sous-catégorie]),
+			            _KPI,
+			            ,
+			            DESC
+			        ) <= 5,
+			        1,
+			        0
+			    )
+			
+			```
+		displayFolder: Ventes
+		lineageTag: 48536c7b-a86b-496e-ba7b-b98c0fcf8138
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'label Retour' = ```
+			
+			
+			VAR CY = [%Retour]
+			VAR PY = [%Retour PY]
+			VAR Delta = CY - PY
+			
+			RETURN
+			SWITCH(
+			    TRUE(),
+			    ISBLANK(CY) || ISBLANK(PY), "→ 0 pt",
+			    Delta > 0, "+" & FORMAT(Delta * 100, "0.00","fr-FR") & " pts" & "▲",
+			    Delta < 0,  "-" & FORMAT(ABS(Delta * 100), "0.00","fr-FR") & " pts" & "▼",
+			    "→ 0.00 pt"
+			)
+			
+			```
+		displayFolder: Retour
+		lineageTag: 63000058-14ae-46e2-b7cb-75356ad0c614
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'label Nbre ref' = ```
+			
+			VAR val = [Nbre Ref]
+			VAR _PY = CALCULATE([Nbre Ref],SAMEPERIODLASTYEAR(Calendrier_auto[Date]))
+			VAR delta = val - _PY
+			VAR Pourcentage = DIVIDE(delta,_PY) 
+			
+			
+			
+			VAR montantFormat =
+			    SWITCH(
+			        TRUE(),
+			        ISBLANK(_PY) || _PY = 0, "0 ",
+			        ABS(delta) >= 1000000, FORMAT(delta / 1000000, "+#,0.0\ M;-#,0.0\ M;0 ","fr-FR"),
+			        FORMAT(delta / 1000, "+#,0.0\ K;-#,0.0\ K;0 ","fr-FR")
+			    )
+			
+			
+			-- Pourcentage avec + ou - ou 0
+			VAR PourcentageFormat =
+			    IF(
+			        ISBLANK(_PY) || _PY = 0,
+			        "0%",
+			        FORMAT(Pourcentage, "+0.00%;-0.00%;0.00%","fr-FR")
+			    )
+			
+			-- Flèche directionnelle
+			VAR Fleche =
+			    SWITCH(
+			        TRUE(),
+			        ISBLANK(_PY) || _PY = 0, "→",
+			        Pourcentage < 0, "▼",
+			        Pourcentage > 0, "▲",
+			        "→"  -- cas par défaut si Pourcentage = 0
+			    )
+			
+			
+			RETURN
+			montantFormat & " | " & PourcentageFormat & " " & Fleche
+			```
+		displayFolder: Dimensions\produit
+		lineageTag: 28069250-e1ca-4c65-9551-f97bd7783ba1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Delta Nbre ref' = ```
+			
+			VAR val = [Nbre Ref]
+			VAR _PY = CALCULATE([Nbre Ref], SAMEPERIODLASTYEAR(Calendrier_auto[Date]))
+			VAR delta = val - _PY
+			
+			RETURN 
+			    IF(
+			     ISBLANK(val) || ISBLANK(_PY) , 0,
+			      delta)
+			```
+		displayFolder: Dimensions\produit
+		lineageTag: 1701b632-a9c3-44db-85dc-6df5e183db99
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Delta Qté' = ```
+			
+			VAR val = [Qté vendu]
+			VAR _PY = CALCULATE([Qté vendu], SAMEPERIODLASTYEAR(Calendrier_auto[Date])) 
+			Var delta= val - _PY
+			RETURN
+			 IF(
+			     ISBLANK(val) || ISBLANK(_PY) , 0,
+			      delta)
+			```
+		displayFolder: Ventes\Qté
+		lineageTag: 3f0fdaa3-d9aa-45c2-9aab-27abbb059a12
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'label Qté' = ```
+			
+			VAR val = [Qté vendu]
+			VAR _PY = CALCULATE([Qté vendu],SAMEPERIODLASTYEAR(Calendrier_auto[Date]))
+			VAR delta = val - _PY
+			VAR Pourcentage = DIVIDE(delta,_PY) 
+			
+			
+			
+			VAR montantFormat =
+			    SWITCH(
+			        TRUE(),
+			        ISBLANK(_PY) || _PY = 0, "0 ",
+			        ABS(delta) >= 1000000, FORMAT(delta / 1000000, "+#,0.0\ M;-#,0.0\ M;0 ","fr-FR"),
+			        FORMAT(delta / 1000, "+#,0.0\ K;-#,0.0\ K;0 ","fr-FR")
+			    )
+			
+			
+			-- Pourcentage avec + ou - ou 0
+			VAR PourcentageFormat =
+			    IF(
+			        ISBLANK(_PY) || _PY = 0,
+			        "0%",
+			        FORMAT(Pourcentage, "+0.00%;-0.00%;0.00%","fr-FR")
+			    )
+			
+			-- Flèche directionnelle
+			VAR Fleche =
+			    SWITCH(
+			        TRUE(),
+			        ISBLANK(_PY) || _PY = 0, "→",
+			        Pourcentage < 0, "▼",
+			        Pourcentage > 0, "▲",
+			        "→"  -- cas par défaut si Pourcentage = 0
+			    )
+			
+			
+			RETURN
+			montantFormat & " | " & PourcentageFormat & " " & Fleche
+			```
+		displayFolder: Ventes\Qté
+		lineageTag: e948a9b9-20bb-4e41-a823-cad478db62b1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Delta coût' = ```
+			
+			VAR val = [Cout Prod]
+			VAR _PY = CALCULATE([Cout Prod], SAMEPERIODLASTYEAR(Calendrier_auto[Date]))
+			VAR delta = val - _PY
+			
+			RETURN 
+			    IF(
+			     ISBLANK(val) || ISBLANK(_PY) , 0,
+			      delta)
+			```
+		displayFolder: Marge
+		lineageTag: a7321f77-4776-4a14-a4b7-a0e6f63fec32
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'label coût' = ```
+			
+			VAR val = [Cout Prod]
+			VAR _PY = CALCULATE([Cout Prod],SAMEPERIODLASTYEAR(Calendrier_auto[Date]))
+			VAR delta = val - _PY
+			VAR Pourcentage = DIVIDE(delta,_PY) 
+			
+			
+			
+			VAR montantFormat =
+			    SWITCH(
+			        TRUE(),
+			        ISBLANK(_PY) || _PY = 0, "0 €",
+			        ABS(delta) >= 1000000, FORMAT(delta / 1000000, "+#,0.0\ M€;-#,0.0\ M€;0 €","fr-FR"),
+			        FORMAT(delta / 1000, "+#,0.0\ K€;-#,0.0\ K€;0 €","fr-FR")
+			    )
+			
+			
+			-- Pourcentage avec + ou - ou 0
+			VAR PourcentageFormat =
+			    IF(
+			        ISBLANK(_PY) || _PY = 0,
+			        "0%",
+			        FORMAT(Pourcentage, "+0.00%;-0.00%;0.00%","fr-FR")
+			    )
+			
+			-- Flèche directionnelle
+			VAR Fleche =
+			    SWITCH(
+			        TRUE(),
+			        ISBLANK(_PY) || _PY = 0, "→",
+			        Pourcentage < 0, "▼",
+			        Pourcentage > 0, "▲",
+			        "→"  -- cas par défaut si Pourcentage = 0
+			    )
+			
+			
+			RETURN
+			montantFormat & " | " & PourcentageFormat & " " & Fleche
+			```
+		displayFolder: Marge
+		lineageTag: d2eee84b-a737-4bce-8523-9a46e3b4138a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Delta P.Moy' = ```
+			
+			VAR val = [Panier Moy.]
+			VAR _PY = CALCULATE([Panier Moy.], SAMEPERIODLASTYEAR(Calendrier_auto[Date]))
+			VAR delta = val - _PY
+			
+			RETURN 
+			    IF(
+			     ISBLANK(val) || ISBLANK(_PY) , 0,
+			      delta)
+			```
+		displayFolder: Ventes
+		lineageTag: 8eef2335-fa88-4ec2-869b-024f1eaca1e2
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'label P.moy' = ```
+			
+			VAR val = [Panier Moy.]
+			VAR _PY = CALCULATE([Panier Moy.],SAMEPERIODLASTYEAR(Calendrier_auto[Date]))
+			VAR delta = val - _PY
+			VAR Pourcentage = DIVIDE(delta,_PY) 
+			
+			
+			
+			VAR montantFormat =
+			    SWITCH(
+			        TRUE(),
+			        ISBLANK(_PY) || _PY = 0, "0 €",
+			        ABS(delta) >= 1000, FORMAT(delta / 1000, "+#,0.0\ K€;-#,0.0\ K€;0 €","fr-FR"),
+			        FORMAT(delta , "+#,0.0\ €;-#,0.0\ €;0 €","fr-FR")
+			    )
+			
+			
+			-- Pourcentage avec + ou - ou 0
+			VAR PourcentageFormat =
+			    IF(
+			        ISBLANK(_PY) || _PY = 0,
+			        "0%",
+			        FORMAT(Pourcentage, "+0.00%;-0.00%;0.00%","fr-FR")
+			    )
+			
+			-- Flèche directionnelle
+			VAR Fleche =
+			    SWITCH(
+			        TRUE(),
+			        ISBLANK(_PY) || _PY = 0, "→",
+			        Pourcentage < 0, "▼",
+			        Pourcentage > 0, "▲",
+			        "→"  -- cas par défaut si Pourcentage = 0
+			    )
+			
+			
+			RETURN
+			montantFormat & " | " & PourcentageFormat & " " & Fleche
+			```
+		displayFolder: Ventes
+		lineageTag: fb9d962c-63e7-43c8-bf8b-824b35e2877d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Qté color' = ```
+			
+			SWITCH(
+			    TRUE(),
+			    [Delta Qté] > 0, "#009300",
+			    [Delta Qté] < 0, "#A60000",
+			    "Gray"
+			
+			)
+			
+			```
+		displayFolder: Ventes\Qté
+		lineageTag: 771e458e-87dd-490b-8ba2-96194a06de29
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'P.M color' = ```
+			
+			SWITCH(
+			    TRUE(),
+			    [Delta P.Moy] > 0, "#009300",
+			    [Delta P.Moy] < 0, "#A60000",
+			    "Gray"
+			
+			)
+			
+			```
+		displayFolder: Ventes
+		lineageTag: c76e5eb0-cdc1-4668-98d8-800c900e418e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'ref color' = ```
+			
+			SWITCH(
+			    TRUE(),
+			    [Delta Nbre ref] > 0, "#009300",
+			    [Delta Nbre ref] < 0, "#A60000",
+			    "Gray"
+			
+			)
+			
+			```
+		displayFolder: Dimensions\produit
+		lineageTag: de924427-d0db-4247-b6e6-74fa51276948
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'prod color' = ```
+			
+			SWITCH(
+			    TRUE(),
+			    [Delta coût] > 0, "#009300",
+			    [Delta coût] < 0, "#A60000",
+			    "Gray"
+			
+			)
+			
+			```
+		displayFolder: Marge
+		lineageTag: 71156cbe-c012-4839-9940-b8d0c7226d89
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '%YoY Marge' = ```
+			
+			var LY = CALCULATE([Marge brut],SAMEPERIODLASTYEAR(Calendrier_auto[Date]))
+			var delta = DIVIDE([Marge brut]-LY, LY)
+			
+			VAR PourcentageFormat =
+			    IF(
+			        ISBLANK(LY) || LY = 0,
+			        "0%",
+			        FORMAT(delta, "+0.00%;-0.00%;0.00%","fr-FR"))
+			
+			VAR fleche =
+			 SWITCH(
+			        TRUE(),
+			        ISBLANK(LY) || LY = 0, "→",
+			        delta < 0, "▼",
+			        delta > 0, "▲",
+			        "→"  -- cas par défaut si Pourcentage = 0
+			    )
+			RETURN   PourcentageFormat & fleche 
+			
+			```
+		displayFolder: Marge
+		lineageTag: 7b93299b-b842-40ce-aff4-8458b68de76e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'LY Marge' =
+			
+			var LY = CALCULATE([Marge brut],SAMEPERIODLASTYEAR(Calendrier_auto[Date]))
+			var delta = [Marge brut]-LY
+			RETURN delta
+		displayFolder: Marge
+		lineageTag: d8dc921c-be62-4c96-8ac0-8e8b74c4b021
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Marge médian/client' = ```
+			
+			MEDIANX(
+			    VALUES(ventes[Customer ID]),
+			    CALCULATE([Marge brut])
+			)
+			
+			```
+		formatString: #,0.0\ "€";-#,0.0\ "€";#,0.0\ "€"
+		displayFolder: Marge
+		lineageTag: 483f1c91-180f-4a2b-9866-f3201cec86ff
+
+	measure 'Âge médian' = MEDIAN(clients[Age])
+		displayFolder: Dimensions\Client
+		lineageTag: e03db5f7-d744-400b-8e2a-6e2d656454aa
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure %engagés = ```
+			
+			DIVIDE(
+			    CALCULATE(
+			        DISTINCTCOUNT(ventes[Customer ID]),
+			        TREATAS(
+			            { "Fidèles", "Premium", "Nouveaux" },
+			            clients[segment]
+			        )
+			    ),
+			    DISTINCTCOUNT(ventes[Customer ID])
+			)
+			
+			```
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		displayFolder: Dimensions\Client
+		lineageTag: 1425ca5a-d742-4986-8b9a-172bf4e49c87
+
+	measure Pie_client = 1 - [%engagés]
+		displayFolder: Dimensions\Client
+		lineageTag: 78a9a2c3-c7f2-4052-a7bc-fe43b1ce1883
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '%engagés PY' = CALCULATE( [%engagés], SAMEPERIODLASTYEAR(Calendrier_auto[Date]))
+		displayFolder: Dimensions\Client
+		lineageTag: a406cda6-94f1-483a-b408-f7010d336cf8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'delta engagé' = ```
+			
+			VAR _CY = [%engagés] 
+			VAR _PY = [%engagés PY] 
+			RETURN
+			IF(
+			    ISBLANK(_PY),
+			    0,
+			    _CY - _PY
+			)
+			
+			```
+		displayFolder: Dimensions\Client
+		lineageTag: 728a8ec4-05a6-459a-84ab-926372186757
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Label delta engagé' =
+			
+			VAR _CY = [%engagés]
+			VAR _PY = [%engagés PY]
+			VAR Delta = _CY - _PY
+			
+			RETURN
+			SWITCH(
+			    TRUE(),
+			    ISBLANK(_CY) || ISBLANK(_PY), "→ 0 pt",
+			    Delta > 0, "+" & FORMAT(Delta * 100, "0.00","fr-FR") & " pts" & "▲",
+			    Delta < 0,  "-" & FORMAT(ABS(Delta * 100), "0.00","fr-FR") & " pts" & "▼",
+			    "→ 0.00 pt"
+			)
+		displayFolder: Dimensions\Client
+		lineageTag: 7be45ae9-ab85-44b9-b775-873643d56171
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Nbre client PY' = CALCULATE([Nbre clients], SAMEPERIODLASTYEAR(Calendrier_auto[Date]))
+		displayFolder: Dimensions\Client
+		lineageTag: 0438cfef-8d68-45d9-bc26-9d7b2bf54443
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'delta Nbre client' = ```
+			
+			
+			VAR _CY = [Nbre clients]
+			VAR _PY = [Nbre client PY]
+			RETURN
+			IF(
+			    ISBLANK(_PY),
+			    0,
+			    _CY - _PY
+			)
+			
+			```
+		displayFolder: Dimensions\Client
+		lineageTag: cf3764ec-7723-4a9b-8348-816a6a604cf1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'label Nbre client' = ```
+			
+			VAR val = [Nbre clients]
+			VAR _PY = [Nbre client PY]
+			VAR delta = val - _PY
+			VAR Pourcentage = DIVIDE(delta,_PY) 
+			
+			
+			
+			VAR montantFormat =
+			    SWITCH(
+			        TRUE(),
+			        ISBLANK(_PY) || _PY = 0, "0 ",
+			        ABS(delta) >= 1000000, FORMAT(delta / 1000000, "+#,0.0\ M;-#,0.0\ M;0 ","fr-FR"),
+			        FORMAT(delta / 1000, "+#,0.0\ K;-#,0.0\ K;0 ","fr-FR")
+			    )
+			
+			
+			-- Pourcentage avec + ou - ou 0
+			VAR PourcentageFormat =
+			    IF(
+			        ISBLANK(_PY) || _PY = 0,
+			        "0%",
+			        FORMAT(Pourcentage, "+0.00%;-0.00%;0.00%","fr-FR")
+			    )
+			
+			-- Flèche directionnelle
+			VAR Fleche =
+			    SWITCH(
+			        TRUE(),
+			        ISBLANK(_PY) || _PY = 0, "→",
+			        Pourcentage < 0, "▼",
+			        Pourcentage > 0, "▲",
+			        "→"  -- cas par défaut si Pourcentage = 0
+			    )
+			
+			
+			RETURN
+			montantFormat & " | " & PourcentageFormat & " " & Fleche
+			```
+		displayFolder: Dimensions\Client
+		lineageTag: ddcea722-423d-4867-9d39-0cb7736fcf80
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'marge méd LY' = CALCULATE( [Marge médian/client], SAMEPERIODLASTYEAR(Calendrier_auto[Date]))
+		displayFolder: Marge
+		lineageTag: d2ac0bcd-8a8c-462e-8aaf-a38f5dc96c9a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'delta marge méd' = ```
+			
+			VAR _CY = [Marge médian/client] 
+			VAR _PY = [marge méd LY] 
+			RETURN
+			IF(
+			    ISBLANK(_PY),
+			    0,
+			    _CY - _PY
+			)
+			
+			```
+		displayFolder: Marge
+		lineageTag: b65dca93-6a99-4b6c-aed4-084e3570b7b1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'label marge méd' = ```
+			
+			VAR val = [Marge médian/client]
+			VAR _PY = [marge méd LY]
+			VAR delta = val - _PY
+			VAR Pourcentage = DIVIDE(delta,_PY) 
+			
+			
+			
+			VAR montantFormat =
+			    SWITCH(
+			        TRUE(),
+			        ISBLANK(_PY) || _PY = 0, "0 €",
+			        ABS(delta) >= 1000, FORMAT(delta / 1000, "+#,0.0\ K€;-#,0.0\ K€;0 €","fr-FR"),
+			        FORMAT(delta , "+#,0.0\ €;-#,0.0\ €;0 €","fr-FR")
+			    )
+			
+			
+			-- Pourcentage avec + ou - ou 0
+			VAR PourcentageFormat =
+			    IF(
+			        ISBLANK(_PY) || _PY = 0,
+			        "0%",
+			        FORMAT(Pourcentage, "+0.00%;-0.00%;0.00%","fr-FR")
+			    )
+			
+			-- Flèche directionnelle
+			VAR Fleche =
+			    SWITCH(
+			        TRUE(),
+			        ISBLANK(_PY) || _PY = 0, "→",
+			        Pourcentage < 0, "▼",
+			        Pourcentage > 0, "▲",
+			        "→"  -- cas par défaut si Pourcentage = 0
+			    )
+			
+			
+			RETURN
+			montantFormat & " | " & PourcentageFormat & " " & Fleche
+			```
+		displayFolder: Marge
+		lineageTag: 440da94c-966b-4a14-9a05-69884906e98d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Active filter' =
+			
+			
+			var years = if ( ISFILTERED(Calendrier_auto[Année]),1,0)
+			var mois = if ( ISFILTERED(Calendrier_auto[NomMois]),1,0)
+			var cat = if ( ISFILTERED(produits[catégorie]),1,0)
+			var segment = if ( ISFILTERED(clients[segment]),1,0)
+			var ville = if ( ISFILTERED(magasins[Country]),1,0)
+			
+			var total = years + mois + cat + segment + ville
+			
+			RETURN
+			total & ""
+		lineageTag: d339f1db-d9fc-4111-97ef-3f3894a97331
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Titre pareto prod' = ```
+			
+			SWITCH(
+			    SELECTEDVALUE('Dimension'[Dimension Commande]),
+			    0, "Top catégorie (80% Marge)",
+			    1, "Top ss-catégorie (80% Marge)",
+			    3, "Top magasin (80% Marge)",
+			    "Top Dimension"
+			)
+			
+			```
+		displayFolder: Titre dynamique
+		lineageTag: b12cb519-671f-426b-bec3-4243ecefaaa0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Titre pie prod' = ```
+			
+			SWITCH(
+			    SELECTEDVALUE('Kpi'[Kpi Commande]),
+			    1, "Marge par catégorie produit",
+			    3, "Commandes par catégorie produit",
+			    6, "Quantité par catégorie produit",
+			    "Kpi par catégorie produit"
+			)
+			
+			```
+		displayFolder: Titre dynamique
+		lineageTag: 8e52a608-1ce1-40dd-a5bf-6d3951a94386
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Titre pareto client' = ```
+			
+			SWITCH(
+			    SELECTEDVALUE('Dimension'[Dimension Commande]),
+			    2, "Top Segment (80% Marge)",
+			    4, "Top Classe d'âge (80% Marge)",
+			    "Top Dimension"
+			)
+			
+			```
+		displayFolder: Titre dynamique
+		lineageTag: 06160f9e-f59f-43e0-9006-e4c45608ca50
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Column
+		isHidden
+		formatString: 0
+		lineageTag: 4ad03fca-ec1a-4d30-bb2c-1fecfe776291
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition mesures = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = 37d7007a1f194875b59586cb81f7751e
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

@@ -1,0 +1,59 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
+  "name": "4847ee236e4b8a92d9d6",
+  "position": {
+    "x": 10,
+    "y": 66.666666666666671,
+    "z": 2000,
+    "height": 43.333333333333336,
+    "width": 191.11111111111111,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "F",
+                    "textStyle": {
+                      "color": "#e6e6e6"
+                    }
+                  },
+                  {
+                    "value": "rancis Guy-Stéphane NOGO",
+                    "textStyle": {
+                      "fontFamily": "Georgia",
+                      "color": "#e6e6e6"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "parentGroupName": "3668aeffdd0c3ac96e31"
+}

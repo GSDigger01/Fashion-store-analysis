@@ -1,0 +1,76 @@
+table 'Time Intelligence'
+	lineageTag: 792e2351-63ba-4b57-8e47-175def14f9a6
+
+	calculationGroup
+
+		calculationItem CY = ```
+				
+				    SELECTEDMEASURE()
+				```
+
+		calculationItem PY = ```
+				
+				    CALCULATE(
+				        SELECTEDMEASURE(), SAMEPERIODLASTYEAR(Calendrier_auto[Date])
+				)
+				```
+
+		calculationItem 'YoY % with Arrows' = ```
+				
+				VAR CurrentValue = SELECTEDMEASURE()
+				VAR PriorYearValue = 
+				    CALCULATE(
+				        SELECTEDMEASURE(),
+				        SAMEPERIODLASTYEAR('Calendrier_auto'[Date])
+				    )
+				VAR YoYChange = DIVIDE(CurrentValue - PriorYearValue, ABS(PriorYearValue), BLANK())
+				VAR YoYPercentText = FORMAT(YoYChange, "+0.0%;-0.0%;0.0%")
+				
+				VAR Arrow = 
+				    SWITCH(
+				        TRUE(),
+				        YoYChange > 0, "⬆",
+				        YoYChange < 0, "⬇",
+				        "➡️"
+				    )
+				
+				RETURN
+				IF(
+				    ISBLANK(YoYChange),
+				    BLANK(),
+				    YoYPercentText & " " & Arrow
+				)
+				
+				```
+
+		calculationItem YoY = ```
+				
+				VAR ly = CALCULATE(
+				                SELECTEDMEASURE(),
+				                SAMEPERIODLASTYEAR(Calendrier_auto[Date])
+				)
+				
+				VAR dif = SELECTEDMEASURE() - ly
+				RETURN dif
+				
+				
+				```
+
+	column 'Time calculation'
+		dataType: string
+		lineageTag: 86252498-f049-4a58-9239-6cac22b353bd
+		summarizeBy: none
+		sourceColumn: Name
+		sortByColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ordinal
+		dataType: int64
+		formatString: 0
+		lineageTag: 54ff1eec-1fe1-4159-b6bd-83f9ab33bb2d
+		summarizeBy: sum
+		sourceColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+

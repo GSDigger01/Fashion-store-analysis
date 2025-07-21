@@ -1,0 +1,16 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
+  "name": "7f18637116c8e803563a",
+  "position": {
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "height": 140,
+    "width": 383.17722681359044
+  },
+  "visualGroup": {
+    "displayName": "Carte",
+    "groupMode": "ScaleMode"
+  },
+  "parentGroupName": "456944b221c95d8152dc"
+}

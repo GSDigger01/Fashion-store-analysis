@@ -1,0 +1,165 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 445
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 802.59876169232984,
+            "y": 1102.8572492556755
+          },
+          "nodeIndex": "Calendrier_auto",
+          "nodeLineageTag": "bb0b1be6-b8ee-42b3-94e4-1b36774bd001",
+          "size": {
+            "height": 243,
+            "width": 234
+          },
+          "zIndex": 11
+        },
+        {
+          "location": {
+            "x": 500.33595506065933,
+            "y": 1249.2213901545306
+          },
+          "nodeIndex": "clients",
+          "nodeLineageTag": "a814ff3e-70d9-4ce4-a019-ae3f9b6dc216",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 833.19752202282427,
+            "y": 677.04642783464089
+          },
+          "nodeIndex": "employees",
+          "nodeLineageTag": "ff6f8af3-512c-49bb-86a8-44aa79db0655",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 254.10894708804494,
+            "y": 653.35572942992917
+          },
+          "nodeIndex": "magasins",
+          "nodeLineageTag": "61aff063-26d3-488c-a823-88ec986c6173",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 10
+        },
+        {
+          "location": {
+            "x": 165.20670120140568,
+            "y": 1081.1352990067317
+          },
+          "nodeIndex": "produits",
+          "nodeLineageTag": "5c554722-2fa8-4285-b55a-0ddc463489dc",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 526.84497938413369,
+            "y": 839.79524979413611
+          },
+          "nodeIndex": "ventes",
+          "nodeLineageTag": "5a984eb1-eb7d-46e5-ac5b-bddb9126c09b",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 9
+        },
+        {
+          "location": {
+            "x": 1267.2647704899211,
+            "y": 636.91202509151231
+          },
+          "nodeIndex": "mesures",
+          "nodeLineageTag": "f5a45cc8-0703-4e85-b472-79da550f982e",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 1271.4183801011682,
+            "y": 883.44726417164759
+          },
+          "nodeIndex": "Time Intelligence",
+          "nodeLineageTag": "792e2351-63ba-4b57-8e47-175def14f9a6",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 1270.5168693920405,
+            "y": 1052.2656223036106
+          },
+          "nodeIndex": "Kpi",
+          "nodeLineageTag": "4d6d3b6b-5789-4a60-a9fa-4ab797aa00d1",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 1277.6336598918574,
+            "y": 1244.5512353803506
+          },
+          "nodeIndex": "Last_Maj",
+          "nodeLineageTag": "281e47f3-fdd1-43fd-b3cd-c3a6ce776171",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 1282.8513680871097,
+            "y": 1410.7185945844433
+          },
+          "nodeIndex": "Dimension",
+          "nodeLineageTag": "9faa2665-fa3a-456e-8922-33aaf4de54e7",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 5
+        }
+      ],
+      "name": "Toutes les tables",
+      "zoomValue": 40,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Toutes les tables",
+  "defaultDiagram": "Toutes les tables"
+}

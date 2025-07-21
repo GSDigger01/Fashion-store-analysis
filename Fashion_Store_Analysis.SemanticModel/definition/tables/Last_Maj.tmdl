@@ -1,0 +1,41 @@
+table Last_Maj
+	lineageTag: 281e47f3-fdd1-43fd-b3cd-c3a6ce776171
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 0bcb7fe0-2879-467d-afad-4c105ab30dd8
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Heure
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: ae862a78-00ff-4214-a240-2673843ae1cd
+		summarizeBy: none
+		sourceColumn: Heure
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	partition Last_Maj = m
+		mode: import
+		source =
+				let
+				    Source = DateTime.LocalNow(),
+				    DateDerniereMaj = #table(type table [Date = datetime], {{Source}}),
+				    #"Fractionner la colonne par délimiteur" = Table.SplitColumn(Table.TransformColumnTypes(DateDerniereMaj, {{"Date", type text}}, "fr-CM"), "Date", Splitter.SplitTextByDelimiter(" ", QuoteStyle.Csv), {"Date.1", "Date.2"}),
+				    #"Type modifié" = Table.TransformColumnTypes(#"Fractionner la colonne par délimiteur",{{"Date.1", type date}, {"Date.2", type time}}),
+				    #"Colonnes renommées" = Table.RenameColumns(#"Type modifié",{{"Date.1", "Date"}, {"Date.2", "Heure"}})
+				in
+				    #"Colonnes renommées"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,33 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	discourageImplicitMeasures
+	sourceQueryCulture: fr-CM
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBIDesktopVersion = 2.145.1105.0 (25.07)+decbc46fce458c5b8d5109d6f32a743f2ac949c8
+
+annotation PBI_QueryOrder = ["Fn_Import","clients-old","employees","magasins","produits","ventes","Calendrier_auto","RFM-Client","Last_Maj","clients"]
+
+annotation PBI_ProTooling = ["CalcGroup","DevMode"]
+
+annotation __TEdtr = 1
+
+ref table employees
+ref table magasins
+ref table produits
+ref table ventes
+ref table Calendrier_auto
+ref table mesures
+ref table 'Time Intelligence'
+ref table Kpi
+ref table Last_Maj
+ref table Dimension
+ref table clients
+
+ref cultureInfo en-US
+

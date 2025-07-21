@@ -1,0 +1,244 @@
+{
+  "name": "Innovate",
+  "dataColors": [
+    "#701C92",
+    "#BF009F",
+    "#F47853",
+    "#201444",
+    "#755591",
+    "#862222",
+    "#C4B07B",
+    "#F15628"
+  ],
+  "foreground": "#FFFFFF",
+  "foregroundNeutralSecondary": "#D2D0CE",
+  "foregroundNeutralTertiary": "#979593",
+  "background": "#3a3a3a",
+  "backgroundLight": "#3B3A39",
+  "backgroundNeutral": "#605E5C",
+  "tableAccent": "#2878BD",
+  "maximum": "#2F013E",
+  "center": "#D7900D",
+  "minimum": "#FF82D3",
+  "hyperlink": "#2878BD",
+  "visitedHyperlink": "#D0E4F5",
+  "textClasses": {
+    "callout": {
+      "fontFace": "wf_standard-font_light, helvetica, arial, sans-serif",
+      "color": "#FFFFFF"
+    },
+    "title": {
+      "fontFace": "'Segoe UI', wf_segoe-ui_normal, helvetica, arial, sans-serif",
+      "color": "#FFFFFF"
+    },
+    "header": {
+      "fontFace": "Arial",
+      "color": "#FFFFFF"
+    },
+    "label": {
+      "fontFace": "'Segoe UI', wf_segoe-ui_normal, helvetica, arial, sans-serif",
+      "color": "#FFFFFF"
+    }
+  },
+  "visualStyles": {
+    "*": {
+      "*": {
+        "background": [
+          {
+            "color": {
+              "solid": {
+                "color": "#6F028D"
+              }
+            }
+          }
+        ],
+        "visualHeader": [
+          {
+            "foreground": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            },
+            "border": {
+              "solid": {
+                "color": "#3a3a3a"
+              }
+            },
+            "background": {
+              "solid": {
+                "color": "#3a3a3a"
+              }
+            }
+          }
+        ],
+        "outspacePane": [
+          {
+            "backgroundColor": {
+              "solid": {
+                "color": "#3a3a3a"
+              }
+            },
+            "foregroundColor": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            },
+            "transparency": 0,
+            "border": true,
+            "borderColor": {
+              "solid": {
+                "color": "#979593"
+              }
+            }
+          }
+        ],
+        "filterCard": [
+          {
+            "$id": "Applied",
+            "transparency": 0,
+            "foregroundColor": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            },
+            "backgroundColor": {
+              "solid": {
+                "color": "#605E5C"
+              }
+            },
+            "inputBoxColor": {
+              "solid": {
+                "color": "#605E5C"
+              }
+            },
+            "borderColor": {
+              "solid": {
+                "color": "#979593"
+              }
+            },
+            "border": true
+          },
+          {
+            "$id": "Available",
+            "transparency": 0,
+            "foregroundColor": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            },
+            "backgroundColor": {
+              "solid": {
+                "color": "#3a3a3a"
+              }
+            },
+            "inputBoxColor": {
+              "solid": {
+                "color": "#3a3a3a"
+              }
+            },
+            "borderColor": {
+              "solid": {
+                "color": "#979593"
+              }
+            },
+            "border": true
+          }
+        ],
+        "visualTooltip": [
+          {
+            "themedTitleFontColor": {
+              "solid": {
+                "color": "#9E259A"
+              }
+            },
+            "themedValueFontColor": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            },
+            "themedBackground": {
+              "solid": {
+                "color": "#31044E"
+              }
+            }
+          }
+        ],
+        "visualHeaderTooltip": [
+          {
+            "themedTitleFontColor": {
+              "solid": {
+                "color": "#9E259A"
+              }
+            },
+            "themedBackground": {
+              "solid": {
+                "color": "#31044E"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "slicer": {
+      "*": {
+        "items": [
+          {
+            "background": {
+              "solid": {
+                "color": "#3a3a3a"
+              }
+            }
+          }
+        ],
+        "numericInputStyle": [
+          {
+            "background": {
+              "solid": {
+                "color": "#3a3a3a"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "keyDriversVisual": {
+      "*": {
+        "keyInfluencersVisual": [
+          {
+            "canvasColor": {
+              "solid": {
+                "color": "#3B3A39"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "page": {
+      "*": {
+        "outspace": [
+          {
+            "color": {
+              "solid": {
+                "color": "#3a3a3a"
+              }
+            }
+          }
+        ],
+        "background": [
+          {
+            "transparency": 0,
+            "color": {
+              "solid": {
+                "color": "#3a3a3a"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "neutral": "#CAC307",
+  "bad": "#EE0808",
+  "good": "#058803"
+}

@@ -1,0 +1,74 @@
+table produits
+	lineageTag: 5c554722-2fa8-4285-b55a-0ddc463489dc
+
+	column 'Product ID'
+		dataType: int64
+		formatString: 0
+		lineageTag: 5ea605ba-869e-4fb4-91a9-96a894bdc32a
+		summarizeBy: none
+		sourceColumn: Product ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column catégorie
+		dataType: string
+		lineageTag: 1aa673c5-02fa-49b8-a926-fcf555e3a9eb
+		summarizeBy: none
+		sourceColumn: catégorie
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sous-catégorie
+		dataType: string
+		lineageTag: 67fd60a1-53d0-4fbc-8433-dd652f16942a
+		summarizeBy: none
+		sourceColumn: Sous-catégorie
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sizes
+		dataType: string
+		lineageTag: 4f8a54b3-760d-462f-83e4-c8332d2838fe
+		summarizeBy: none
+		sourceColumn: Sizes
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Production Cost'
+		dataType: decimal
+		formatString: #,0.00\ "€";-#,0.00\ "€";#,0.00\ "€"
+		lineageTag: b394cc67-ade4-42e2-945a-fe09160d4c76
+		summarizeBy: none
+		sourceColumn: Production Cost
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'catégorie Hiérarchie'
+		lineageTag: 22059932-c3a4-4266-9e3d-a02d391af0b5
+
+		level catégorie
+			lineageTag: b4bebe58-04ed-4406-9763-aec6cd2c4975
+			column: catégorie
+
+		level Sous-catégorie
+			lineageTag: ecaffb3d-a0dc-412d-9ca6-2cbc26bdc584
+			column: Sous-catégorie
+
+	partition produits = m
+		mode: import
+		source =
+				let
+				    Source = Fn_Import("produits.csv"),
+				    #"Colonnes supprimées" = Table.RemoveColumns(Source,{"Description PT", "Description DE", "Description FR", "Description ES", "Description EN", "Description ZH", "Color"}),
+				    #"Type modifié" = Table.TransformColumnTypes(#"Colonnes supprimées",{{"Product ID", Int64.Type}}),
+				    #"Valeur remplacée" = Table.ReplaceValue(#"Type modifié",".",",",Replacer.ReplaceText,{"Production Cost"}),
+				    #"Type modifié1" = Table.TransformColumnTypes(#"Valeur remplacée",{{"Production Cost", Currency.Type}}),
+				    #"Valeur remplacée1" = Table.ReplaceValue(#"Type modifié1","Children","Enfant",Replacer.ReplaceText,{"Category"}),
+				    #"Colonnes renommées" = Table.RenameColumns(#"Valeur remplacée1",{{"Sub Category", "Sous-catégorie"}, {"Category", "catégorie"}})
+				in
+				    #"Colonnes renommées"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

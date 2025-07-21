@@ -1,0 +1,191 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
+  "name": "26c0316a2e7e0b7eaa1c",
+  "position": {
+    "x": 950,
+    "y": 66,
+    "z": 10000,
+    "height": 126,
+    "width": 296,
+    "tabOrder": 11000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "65% ",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontFamily": "DIN",
+                      "color": "#ff99ee"
+                    }
+                  },
+                  {
+                    "value": "de la marge est générée par les ",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Light",
+                      "fontSize": "9pt",
+                      "color": "#ff99ee"
+                    }
+                  },
+                  {
+                    "value": "femmes",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Light",
+                      "fontStyle": "italic",
+                      "fontSize": "9pt",
+                      "color": "#ff99ee"
+                    }
+                  },
+                  {
+                    "value": ".",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Light",
+                      "fontSize": "9pt",
+                      "color": "#ff99ee"
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "center",
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "La classe d'âge la plus rentable est celle de ",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Light",
+                      "fontSize": "9pt",
+                      "color": "#ff99ee"
+                    }
+                  },
+                  {
+                    "value": "18-24 ans",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Light",
+                      "fontStyle": "italic",
+                      "fontSize": "9pt",
+                      "color": "#ff99ee"
+                    }
+                  },
+                  {
+                    "value": " avec ",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Light",
+                      "fontSize": "9pt",
+                      "color": "#ff99ee"
+                    }
+                  },
+                  {
+                    "value": "30%",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontFamily": "DIN",
+                      "color": "#ff99ee"
+                    }
+                  },
+                  {
+                    "value": " de la marge totale.",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Light",
+                      "fontSize": "9pt",
+                      "color": "#ff99ee"
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "center",
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Le segment le plus rentable est  \"",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Light",
+                      "fontSize": "9pt",
+                      "color": "#ff99ee"
+                    }
+                  },
+                  {
+                    "value": "Prémium\"",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Light",
+                      "fontStyle": "italic",
+                      "fontSize": "9pt",
+                      "color": "#ff99ee"
+                    }
+                  },
+                  {
+                    "value": " avec ",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Light",
+                      "fontSize": "9pt",
+                      "color": "#ff99ee"
+                    }
+                  },
+                  {
+                    "value": "40%",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontFamily": "DIN",
+                      "color": "#ff99ee"
+                    }
+                  },
+                  {
+                    "value": " des ventes tandis que celui avec le plus grand effectifs est \"",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Light",
+                      "fontSize": "9pt",
+                      "color": "#ff99ee"
+                    }
+                  },
+                  {
+                    "value": "Fidèles\"",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Light",
+                      "fontStyle": "italic",
+                      "fontSize": "9pt",
+                      "color": "#ff99ee"
+                    }
+                  },
+                  {
+                    "value": " .",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Light",
+                      "fontSize": "9pt",
+                      "color": "#ff99ee"
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "center",
+                "listType": "bullet"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,167 @@
+table Calendrier_auto
+	lineageTag: bb0b1be6-b8ee-42b3-94e4-1b36774bd001
+	dataCategory: Time
+
+	column Date
+		dataType: dateTime
+		isKey
+		formatString: Long Date
+		lineageTag: 1561ef5f-0308-45d6-8404-e3217dbbd4a0
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Année
+		dataType: int64
+		formatString: 0
+		lineageTag: 58701d32-9295-4cf2-a335-110881c574a8
+		summarizeBy: none
+		sourceColumn: Année
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mois
+		dataType: int64
+		formatString: 0
+		lineageTag: 02c7644a-0675-4298-999f-cec8b9c61d43
+		summarizeBy: none
+		sourceColumn: Mois
+
+		annotation SummarizationSetBy = Automatic
+
+	column NomMois
+		dataType: string
+		lineageTag: c8baa658-531e-44fd-a60a-77ffef7a7278
+		summarizeBy: none
+		sourceColumn: NomMois
+		sortByColumn: Mois
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column Trimestre
+		dataType: int64
+		formatString: 0
+		lineageTag: 96d396a2-1729-4a74-b0d9-2f20e82adffb
+		summarizeBy: none
+		sourceColumn: Trimestre
+
+		annotation SummarizationSetBy = Automatic
+
+	column NomJour
+		dataType: string
+		lineageTag: dfee6ea8-8627-472a-897a-a3e0067b7202
+		summarizeBy: none
+		sourceColumn: NomJour
+		sortByColumn: JourSemaine
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column NomMois2
+		dataType: string
+		lineageTag: 544b7ff2-93f8-4784-9001-57d14d3cbea3
+		summarizeBy: none
+		sourceColumn: NomMois2
+		sortByColumn: Mois
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column JourMois
+		dataType: int64
+		formatString: 0
+		lineageTag: 26d63e4f-f93c-499f-a019-7d58d222a241
+		summarizeBy: none
+		sourceColumn: JourMois
+
+		annotation SummarizationSetBy = Automatic
+
+	column JourSemaine
+		dataType: int64
+		formatString: 0
+		lineageTag: d19d46b6-8203-4325-a425-d472bee50be4
+		summarizeBy: none
+		sourceColumn: JourSemaine
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy Hiérarchie_date
+		lineageTag: c3305a03-861b-42ff-9f65-52f913826e77
+
+		level Année
+			lineageTag: 67f49769-0b11-4835-b372-0998a12fafd2
+			column: Année
+
+		level Trimestre
+			lineageTag: e0a6b502-649d-44f8-959e-d8f7abf8e455
+			column: Trimestre
+
+		level Mois
+			lineageTag: 9e0bfdd2-eb0f-4357-8906-540a3494be57
+			column: Mois
+
+	hierarchy 'Trimestre Hiérarchie'
+		lineageTag: 056184cd-3325-4eda-ae13-1eb915fcd3d2
+
+		level Trimestre
+			lineageTag: 6c4b013c-00e3-4c84-bb21-a9101f68928b
+			column: Trimestre
+
+		level NomMois2
+			lineageTag: de8315da-ced3-4f0f-a147-99cc8a76e320
+			column: NomMois2
+
+		level NomJour
+			lineageTag: 8bff200b-4f4a-4e8c-8cd6-69ca19592f55
+			column: NomJour
+
+	partition Calendrier_auto = m
+		mode: import
+		source = ```
+				let
+				    // Définir la date de début (date minimale des ventes)
+				    DateDebut = Date.From(List.Min(#"ventes"[Date])),
+				    
+				    DateMax =List.Max(#"ventes"[Date]),
+				    // Définir la date de fin (fin de l'année en cours)
+				    DateFin = #date(Date.Year(DateMax), 03, 31),
+				    
+				    // Calculer le nombre de jours entre les deux dates
+				    NombreDeJours = Duration.Days(DateFin - DateDebut) + 1,
+				    
+				    // Générer la liste des dates
+				    ListeDates = List.Dates(DateDebut, NombreDeJours, #duration(1,0,0,0)),
+				    
+				    // Convertir la liste en table
+				    TableDates = Table.FromList(ListeDates, Splitter.SplitByNothing(), {"Date"}),
+				    
+				    // Ajouter des colonnes supplémentaires
+				    TableAvecColonnes = Table.TransformColumns(TableDates, {{"Date", each Date.From(_), type date}}),
+				    TableFinale = Table.AddColumn(TableAvecColonnes, "Année", each Date.Year([Date]), Int64.Type),
+				    TableFinale1 = Table.AddColumn(TableFinale, "Mois", each Date.Month([Date]), Int64.Type),
+				    TableFinale2 = Table.AddColumn(TableFinale1, "NomMois", each Date.ToText([Date], "MMMM"), type text),
+				    TableFinale3 = Table.AddColumn(TableFinale2, "Trimestre", each Date.QuarterOfYear([Date]), Int64.Type),
+				    TableFinale4 = Table.AddColumn(TableFinale3, "JourMois", each Date.Day([Date]), Int64.Type),
+				    TableFinale5 = Table.AddColumn(TableFinale4, "NomJour", each Date.ToText([Date], "dddd"), type text),
+				    TableFinale6 = Table.AddColumn(TableFinale5, "NomMois2", each Date.ToText([Date], "MMM"), type text),
+				    TableFinale7 = Table.AddColumn(
+				    TableFinale6,
+				    "JourSemaine",
+				    each Date.DayOfWeek([Date], Day.Monday) + 1,
+				    Int64.Type
+				)
+				in
+				    TableFinale7
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

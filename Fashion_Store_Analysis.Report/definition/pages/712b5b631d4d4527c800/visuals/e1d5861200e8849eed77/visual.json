@@ -1,0 +1,16 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
+  "name": "e1d5861200e8849eed77",
+  "position": {
+    "x": 267.77777777777777,
+    "y": 407.77777777777754,
+    "z": 6000,
+    "height": 257.77777777777783,
+    "width": 586.66666666666663,
+    "tabOrder": 15000
+  },
+  "visualGroup": {
+    "displayName": "Trend",
+    "groupMode": "ScaleMode"
+  }
+}

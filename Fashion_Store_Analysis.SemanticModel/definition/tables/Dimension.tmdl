@@ -1,0 +1,51 @@
+table Dimension
+	lineageTag: 9faa2665-fa3a-456e-8922-33aaf4de54e7
+
+	column Dimension
+		lineageTag: 7d20b748-f5ee-44d3-9ff4-311064b53acf
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Dimension Commande'
+
+		relatedColumnDetails
+			groupByColumn: 'Dimension Champs'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Dimension Champs'
+		isHidden
+		lineageTag: 04ee103f-3159-4031-b03b-139a2b1f8ec6
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Dimension Commande'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Dimension Commande'
+		isHidden
+		formatString: 0
+		lineageTag: bc5fc97c-cc08-4539-9fb1-a9c4d670161d
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dimension = calculated
+		mode: import
+		source =
+				{
+				    ("catégorie", NAMEOF('produits'[catégorie]), 0),
+				    ("Sous-catégorie", NAMEOF('produits'[Sous-catégorie]), 1),
+				    ("segment", NAMEOF('clients'[segment]), 2),
+				    ("Magasin",NAMEOF('magasins'[Store Name]),3),
+				    ("Classe Age",NAMEOF(clients[Classe Age]),4)
+				}
+
+	annotation PBI_Id = fc5dfad33078494e936ffdf1e4e5208d
+

@@ -1,0 +1,306 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/2.1.0/schema.json",
+  "themeCollection": {
+    "baseTheme": {
+      "name": "CY24SU10",
+      "reportVersionAtImport": "5.63",
+      "type": "SharedResources"
+    },
+    "customTheme": {
+      "name": "Innovate910806075624188.json",
+      "reportVersionAtImport": "5.65",
+      "type": "RegisteredResources"
+    }
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "5dddc968029bc2eab3d7",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "clients"
+              }
+            },
+            "Property": "Country"
+          }
+        },
+        "type": "Categorical",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "c",
+              "Entity": "clients",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "Not": {
+                  "Expression": {
+                    "In": {
+                      "Expressions": [
+                        {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Source": "c"
+                              }
+                            },
+                            "Property": "Country"
+                          }
+                        }
+                      ],
+                      "Values": [
+                        [
+                          {
+                            "Literal": {
+                              "Value": "null"
+                            }
+                          }
+                        ]
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "User",
+        "objects": {
+          "general": [
+            {
+              "properties": {
+                "isInvertedSelectionMode": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "true"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "d9146a43d81a27551d03",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "magasins"
+              }
+            },
+            "Property": "Country"
+          }
+        },
+        "type": "Categorical",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "m",
+              "Entity": "magasins",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "Not": {
+                  "Expression": {
+                    "In": {
+                      "Expressions": [
+                        {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Source": "m"
+                              }
+                            },
+                            "Property": "Country"
+                          }
+                        }
+                      ],
+                      "Values": [
+                        [
+                          {
+                            "Literal": {
+                              "Value": "null"
+                            }
+                          }
+                        ]
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "User",
+        "objects": {
+          "general": [
+            {
+              "properties": {
+                "isInvertedSelectionMode": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "true"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "objects": {
+    "section": [
+      {
+        "properties": {
+          "verticalAlignment": {
+            "expr": {
+              "Literal": {
+                "Value": "'Top'"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "outspacePane": [
+      {
+        "properties": {
+          "expanded": {
+            "expr": {
+              "Literal": {
+                "Value": "false"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "publicCustomVisuals": [
+    "AdvancedLinearGaugeDA0D695483C84EDAA6A55149E2DS37",
+    "deneb7E15AEF80B9E4D4F8E12924291ECE89A",
+    "iconMapProE938B1CED4834168A55864E1F8E7242E",
+    "maps",
+    "sankey02300D1BE6F5427989F3DE31CCA9E0F32020"
+  ],
+  "resourcePackages": [
+    {
+      "name": "RegisteredResources",
+      "type": "RegisteredResources",
+      "items": [
+        {
+          "name": "Purple_Client33909172319437875.png",
+          "path": "Purple_Client33909172319437875.png",
+          "type": "Image"
+        },
+        {
+          "name": "purple_Produit4980248729386092.png",
+          "path": "purple_Produit4980248729386092.png",
+          "type": "Image"
+        },
+        {
+          "name": "Powerbi-Purple_black03438817364323321.png",
+          "path": "Powerbi-Purple_black03438817364323321.png",
+          "type": "Image"
+        },
+        {
+          "name": "assurance-investissement6462472993999537.png",
+          "path": "assurance-investissement6462472993999537.png",
+          "type": "Image"
+        },
+        {
+          "name": "boite-de-retour5456986246527613.png",
+          "path": "boite-de-retour5456986246527613.png",
+          "type": "Image"
+        },
+        {
+          "name": "calcul-de-la-taxe9366948249206128.png",
+          "path": "calcul-de-la-taxe9366948249206128.png",
+          "type": "Image"
+        },
+        {
+          "name": "consultant6077821300975969.png",
+          "path": "consultant6077821300975969.png",
+          "type": "Image"
+        },
+        {
+          "name": "de-largent9431064352949308.png",
+          "path": "de-largent9431064352949308.png",
+          "type": "Image"
+        },
+        {
+          "name": "entonnoir6965417408367641.png",
+          "path": "entonnoir6965417408367641.png",
+          "type": "Image"
+        },
+        {
+          "name": "Face_Card20848021590754418.png",
+          "path": "Face_Card20848021590754418.png",
+          "type": "Image"
+        },
+        {
+          "name": "github6919239686241118.png",
+          "path": "github6919239686241118.png",
+          "type": "Image"
+        },
+        {
+          "name": "Innovate910806075624188.json",
+          "path": "Innovate910806075624188.json",
+          "type": "Image"
+        },
+        {
+          "name": "linkedin6395900933357853.png",
+          "path": "linkedin6395900933357853.png",
+          "type": "Image"
+        },
+        {
+          "name": "panier9500693797119474.png",
+          "path": "panier9500693797119474.png",
+          "type": "Image"
+        },
+        {
+          "name": "partenaire5200743656835883.png",
+          "path": "partenaire5200743656835883.png",
+          "type": "Image"
+        },
+        {
+          "name": "rafraichir6887528960286101.png",
+          "path": "rafraichir6887528960286101.png",
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "name": "SharedResources",
+      "type": "SharedResources",
+      "items": [
+        {
+          "name": "CY24SU10",
+          "path": "BaseThemes/CY24SU10.json",
+          "type": "BaseTheme"
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "useStylableVisualContainerHeader": true,
+    "defaultDrillFilterOtherVisuals": true,
+    "allowChangeFilterTypes": true,
+    "useEnhancedTooltips": true,
+    "useDefaultAggregateDisplayName": true
+  }
+}

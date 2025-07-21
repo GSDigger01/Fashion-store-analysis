@@ -1,0 +1,15 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.1.0/schema.json",
+  "name": "8debd6fbbee00a47026a",
+  "position": {
+    "x": 1028.0579557289145,
+    "y": 684.67461462964752,
+    "z": 0,
+    "height": 35.783974585245325,
+    "width": 244.0632563922984
+  },
+  "visualGroup": {
+    "displayName": "Actualiser",
+    "groupMode": "ScaleMode"
+  }
+}
